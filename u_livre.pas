@@ -128,9 +128,8 @@ implementation
 	end;
 	
     
-    
     {   Nom fonction :  creerEmprunt
-        Description : Créé un emprunt avec un numéro unique et l'ajoute dans le tableau des emprunts
+        Description : Créé un emprunt avec un numéro unique
         Auteur : Chritste Thibaud
         Date : 21.12.2016
     }
@@ -139,7 +138,7 @@ implementation
         emprunt : Temprunt;
     begin
         compteurEmprunt := compteurEmprunt + 1;      //On incrémente le nombre d'emprunts ce qui donnera un identifiant unique à l'emprunt
-                                                     // Correct de le faire à la création de l'emprunt ou alors faut-il le faire dans l'emprunt (biblio)
+            
         emprunt.numeroEmprunt := compteurEmprunt;
         emprunt.livre := livre;
         emprunt.adherent := adherent;
@@ -148,10 +147,20 @@ implementation
         creerEmprunt := emprunt       
 	end;
     
-	
+    
+    {   Nom fonction :  afficherEmprunt
+        Description : Affiche un emprunt
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
 	procedure afficherEmprunt(emprunt:Temprunt);
 	begin
-		
+        writeln('Num : ', emprunt.numeroEmprunt);
+        writeln('Livre : ');
+        afficherLivre(emprunt.livre);
+        writeln('Adherent  : ');
+        u_adherent.afficherAdherent(emprunt.adherent);
+        writeln('Date : ', emprunt.dateEmprunt.jour,'.',emprunt.dateEmprunt.mois,'.',emprunt.dateEmprunt.annee); 
 	end;
 	
     
@@ -170,6 +179,7 @@ implementation
 	begin
 		
 	end;
+    
 	
 	function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
 	begin
@@ -190,5 +200,4 @@ implementation
 	begin
 		
 	end;
-    
 end.
