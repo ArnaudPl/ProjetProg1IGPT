@@ -66,7 +66,11 @@ implementation
 	
 	procedure afficherBibliotheque(biblio:Tbibliotheque);
 	begin
-		
+        ClrScr;
+		writeln('Affichage de ', biblio.nomBiblio, ' :');
+        afficheAdherents(biblio);
+        writeln('');
+        afficheEmprunts(biblio);
 	end;
 	
 	function estOuverte(jour:string; heure:integer):boolean;
@@ -138,4 +142,46 @@ implementation
 	begin
 		
 	end;
+    
+    //Procédures et fonctions privées
+    procedure afficheAdherents(biblio:Tbibliotheque);
+    var
+        i : integer;
+    begin
+        writeln('Affichage des ', biblio.nbAdherents, ' adhérents');
+        for i := 0 to biblio.nbAdherents - 1 do
+        begin
+            writeln(' |- ', biblio.tabAdherents[i].nom, ' ', biblio.tabAdherents[i].prenom);
+            writeln(' |  |- Code : ', biblio.tabAdherents[i].codeAdherent);
+            writeln(' |  |- Adresse : ', biblio.tabAdherents[i].adresse.rue, ' ', biblio.tabAdherents[i].adresse.numeroRue);
+            writeln(' |  |- Ville : ', biblio.tabAdherents[i].npa, ' ', biblio.tabAdherents[i].ville, ' - ', biblio.tabAdherents[i].pays);
+            
+            if i < biblio.nbAdherents - 1 then
+                writeln(' |')
+            else
+                writeln('_____');
+        end;
+    end;
+    
+    procedure afficheEmprunts(biblio:Tbibliotheque);
+    var
+        i : integer;
+    begin
+        writeln('Affichage des ', biblio.nbEmprunts, ' emprunts');
+        for i := 0 to biblio.nbEmprunts - 1 do
+        begin
+            writeln(' |- ', biblio.tabEmprunts[i].numeroEmprunt);
+            writeln(' |  |- Livre : ', biblio.tabEmprunts[i].livre.titre);
+            writeln(' |  |  |- ISBN : ', biblio.tabEmprunts[i].livre.isbn);
+            writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
+            writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
+            writeln(' |  |- Adhérent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
+            writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
+            
+            if i < biblio.nbEmprunts - 1 then
+                writeln(' |')
+            else
+                writeln('________');
+        end;
+    end;
 end.
