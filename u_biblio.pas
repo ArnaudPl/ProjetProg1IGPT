@@ -99,7 +99,7 @@ implementation
 	begin
         ajouterNouveauLivre := false;
         
-        if nbLivres < Cmax then
+        if nbLivres < Cmax - 1 then
             begin
 		      tabLivres[nbLivres] := nouveauLivre;
               nbLivres := nbLivres + 1;
@@ -148,8 +148,17 @@ implementation
 	end;
 	
 	function emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):boolean;
+    var
+        emprunt : Temprunt;
 	begin
-		
+        emprunterLivre := false;
+		if tabEmprunts < Cmax - 1 then
+            begin
+                emprunt := u_livre.creerEmprunt(livre, adherent, dateEmprunt);
+                tabEmprunts[nbEmprunts] := emprunt;
+                nbEmprunts := nbEmprunts + 1;
+                emprunterLivre := true;
+            end;
 	end;
 	
 	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean; 
