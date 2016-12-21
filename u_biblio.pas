@@ -57,8 +57,8 @@ interface
 implementation
 
     //Déclaration des procédures privées
-    procedure afficheEmprunts(biblio:Tbibliotheque);
-    procedure afficheAdherents(biblio:Tbibliotheque);
+    procedure afficheEmprunts(biblio:Tbibliotheque);forward;
+    procedure afficheAdherents(biblio:Tbibliotheque);forward;
     
 
 	procedure initBiblio(var biblio:Tbibliotheque);
@@ -84,12 +84,12 @@ implementation
         case jour of
             'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi' : 
                 begin
-                    if ((heure >= 8 and heure < 12) or (heure >= 14 and heure < 20)) then
+                    if (((heure >= 8) and (heure < 12)) or ((heure >= 14) and (heure < 20))) then
                         estOuverte := true;
                 end;
             'lundi' :
                 begin
-                    if (heure >= 14 and heure < 18) then
+                    if ((heure >= 14) and (heure < 18)) then
                         estOuverte := true;
                 end;
         end;
@@ -97,7 +97,14 @@ implementation
 	
 	function ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; nouveauLivre : Tlivre) : boolean; 
 	begin
-		
+        ajouterNouveauLivre := false;
+        
+        if nbLivres < Cmax then
+            begin
+		      tabLivres[nbLivres] := nouveauLivre;
+              nbLivres := nbLivres + 1;
+              ajouterNouveauLivre := true;
+            end;
 	end;
 	
 	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
