@@ -1,119 +1,119 @@
-UNIT u_livre;
-INTERFACE
-	USES u_adherent;
+unit u_livre;
+interface
+	uses u_adherent;
 	
-	CONST
+	const
 		Cmax = 100;
-	VAR
+	var
 		// Variable globale qui doit être initialisée à 0 au début du programme et incrémentée de 1 à chaque création d'emprunt !
-		compteurEmprunt : INTEGER;
-	TYPE
+		compteurEmprunt : integer;
+	type
 	
-		Tlivre = RECORD
-			isbn : STRING;
-			titre : STRING;
-			codeAuteur : STRING;
-			nbPages : INTEGER;
-			nbExemplaires : INTEGER; // Par exemple, la bibliothèque peut posséder trois exemplaires du petit larousse illustré 2013
-		END;
+		Tlivre = record
+			isbn : string;
+			titre : string;
+			codeAuteur : string;
+			nbPages : integer;
+			nbExemplaires : integer; // Par exemple, la bibliothèque peut posséder trois exemplaires du petit larousse illustré 2013
+		end;
 		
 		TypeTabLivres = ARRAY[0..Cmax-1] OF Tlivre;
 		
-		Tdate = RECORD
-			jour : INTEGER;
-			mois : INTEGER;
-			annee : INTEGER;
-		END;
+		Tdate = record
+			jour : integer;
+			mois : integer;
+			annee : integer;
+		end;
 	
-		Temprunt = RECORD
-			numeroEmprunt : INTEGER; //Incrémenté selon le compteur global "compteurEmprunt" déclaré ci-dessous.
+		Temprunt = record
+			numeroEmprunt : integer; //Incrémenté selon le compteur global "compteurEmprunt" déclaré ci-dessous.
 			livre : Tlivre;
 			adherent : Tadherent;
 			dateEmprunt : Tdate;
-		END;
+		end;
 		
-		TypeTabEmprunts = ARRAY[0..Cmax-1] OF Temprunt;
+		TypeTabEmprunts = array[0..Cmax-1] of Temprunt;
 		
 		// Initialise l'unité, en mettant le compteur d'emprunts à 0
-		PROCEDURE initUnite();
+		procedure initUnite();
 		// Demande toutes les informations à l'utilisateur et retourne un nouveau livre ayant les informations saisies
-		FUNCTION saisirLivre():Tlivre;
+		function saisirLivre():Tlivre;
 		// Affiche toutes les informations du livre
-		PROCEDURE afficherLivre(livre:Tlivre);
+		procedure afficherLivre(livre:Tlivre);
 		// Retourne un nouvel emprunt contenant les informations passées en paramètres et un numéro unique (grâce à compteurEmprunt)
-		FUNCTION creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
+		function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
 		// Affiche les informations principales de l'emprunt
-		PROCEDURE afficherEmprunt(emprunt:Temprunt);
+		procedure afficherEmprunt(emprunt:Temprunt);
 		
 		// Ajoute un exemplaire supplémentaire au livre passé en paramètre
-		PROCEDURE ajouterExemplaire(var livre:Tlivre);
+		procedure ajouterExemplaire(var livre:Tlivre);
 		// Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
-		FUNCTION supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:INTEGER):BOOLEAN;
+		function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
-		FUNCTION estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:INTEGER):BOOLEAN; 
+		function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
 		// Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
-		FUNCTION compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):INTEGER;
+		function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
 		// Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
-		FUNCTION compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):INTEGER;
+		function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
 		// Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
-		FUNCTION compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER; adherent : Tadherent) : INTEGER;
-		
-IMPLEMENTATION
-	PROCEDURE initUnite();
-	BEGIN
-		
-	END;
+		function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
 
-	FUNCTION saisirLivre(): Tlivre;
-	BEGIN
+implementation	
+	procedure initUnite();
+	begin
 		
-	END;
+	end;
+
+	function saisirLivre(): Tlivre;
+	begin
+		
+	end;
 	
 
 	
-	PROCEDURE afficherLivre(livre:Tlivre);
-	BEGIN
+	procedure afficherLivre(livre:Tlivre);
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
-	BEGIN
+	function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
+	begin
 		
-	END;
+	end;
 	
-	PROCEDURE afficherEmprunt(emprunt:Temprunt);
-	BEGIN
+	procedure afficherEmprunt(emprunt:Temprunt);
+	begin
 		
-	END;
+	end;
 	
-	PROCEDURE ajouterExemplaire(var livre:Tlivre);
-	BEGIN
+	procedure ajouterExemplaire(var livre:Tlivre);
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:INTEGER):BOOLEAN;
-	BEGIN
+	function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:INTEGER):BOOLEAN; 
-	BEGIN
+	function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):INTEGER; // Retourne le nombre d'exemplaires encore disponibles		
-	BEGIN
+	function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer; // Retourne le nombre d'exemplaires encore disponibles		
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):INTEGER;
-	BEGIN
+	function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER; adherent : Tadherent) : INTEGER;
-	BEGIN
+	function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
+	begin
 		
-	END;
+	end;
 	
-END.
+end.
