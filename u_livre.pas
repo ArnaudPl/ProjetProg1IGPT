@@ -73,8 +73,26 @@ implementation
 	end;
 
 	function saisirLivre(): Tlivre;
+    var
+        livreSaisi : Tlivre;
 	begin
-		
+        writeln('------- Saisie d''un livre -------');
+        writeln('- Veuillez saisir le numero ISBN : ');
+        readln(livreSaisi.isbn);
+        
+        writeln('- Veuillez saisir le titre : ');
+        readln(livreSaisi.titre);
+        
+        writeln('- Veuillez le nom de l''auteur : ');
+        readln(livreSaisi.codeAuteur);
+        
+        writeln('- Veuillez le nombre de pages : ');
+        readln(livreSaisi.nbPages);
+        
+        writeln('- Veuillez le nombre d''exemplaires : ');
+        readln(livreSaisi.nbExemplaires);
+    
+		saisirLivre := livreSaisi;
 	end;
 	
 
