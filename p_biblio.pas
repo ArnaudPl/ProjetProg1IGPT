@@ -9,16 +9,33 @@ uses u_biblio, u_livre, u_adherent, crt;
 	//Procedure chargeant quelques donées de base
 	procedure chargeDonneesInitiales(var biblio:Tbibliotheque; var adherent: Tadherent; var livre: Tlivre);
 	begin
-
+        //Insertion d'une bibliothèque
 		biblio.nomBiblio:='Arc Biblio';
 		biblio.adresse.rue:='Espace de l''Europe';
 		biblio.adresse.numeroRue:='21';
 		biblio.adresse.npa:='2000';
 		biblio.adresse.ville:='Neuchatel';	
 		biblio.adresse.pays:='Suisse';
-	
-		//TODO : Compléter avec quelques adh곥nts et quelques livres
-		
+        
+        
+         //Insertion de livres bibliothèque
+        livre.isbn := '9782070196678';
+        livre.titre := 'Chanson douce';
+        livre.codeAuteur := 'Leïla Slimani';
+        livre.nbPages := 240;
+        livre.nbExemplaires := 3;
+        
+        livre.isbn := '9782070196678';
+        livre.titre := 'Chanson douce';
+        livre.codeAuteur := 'Leïla Slimani';
+        livre.nbPages := 240;
+        livre.nbExemplaires := 3;
+        
+        livre.isbn := '9782749928937';
+        livre.titre := 'Instincts';
+        livre.codeAuteur := 'Sarah Marquis';
+        livre.nbPages := 274;
+        livre.nbExemplaires := 1;
 	end;
 var
 	biblio : Tbibliotheque;
