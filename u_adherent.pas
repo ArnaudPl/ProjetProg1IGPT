@@ -37,7 +37,7 @@ implementation
 	
 	procedure afficherAdherent(adherent:Tadherent);
 	begin
-		
+		//Affichage réalisé dans u_biblio procedure afficheAdherents !
 	end;
 
 end.
