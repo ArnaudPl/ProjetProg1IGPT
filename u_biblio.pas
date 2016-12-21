@@ -1,6 +1,6 @@
 unit u_biblio;
 interface
-	uses u_livre, u_adherent;
+	uses u_livre, u_adherent, crt;
 	
 	const
 		Cmax = 100;
@@ -56,6 +56,11 @@ interface
 
 implementation
 
+    //Déclaration des procédures privées
+    procedure afficheEmprunts(biblio:Tbibliotheque);forward;
+    procedure afficheAdherents(biblio:Tbibliotheque);forward;
+    
+
 	procedure initBiblio(var biblio:Tbibliotheque);
 	begin
         //Initialise tous les compteurs relatifs à un tableau
@@ -75,12 +80,31 @@ implementation
 	
 	function estOuverte(jour:string; heure:integer):boolean;
 	begin
-		
+        estOuverte := false;
+        case jour of
+            'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi' : 
+                begin
+                    if (((heure >= 8) and (heure < 12)) or ((heure >= 14) and (heure < 20))) then
+                        estOuverte := true;
+                end;
+            'lundi' :
+                begin
+                    if ((heure >= 14) and (heure < 18)) then
+                        estOuverte := true;
+                end;
+        end;
 	end;
 	
 	function ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; nouveauLivre : Tlivre) : boolean; 
 	begin
-		
+        ajouterNouveauLivre := false;
+        
+        if nbLivres < Cmax then
+            begin
+		      tabLivres[nbLivres] := nouveauLivre;
+              nbLivres := nbLivres + 1;
+              ajouterNouveauLivre := true;
+            end;
 	end;
 	
 	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
@@ -154,10 +178,10 @@ implementation
             writeln(' |- ', biblio.tabAdherents[i].nom, ' ', biblio.tabAdherents[i].prenom);
             writeln(' |  |- Code : ', biblio.tabAdherents[i].codeAdherent);
             writeln(' |  |- Adresse : ', biblio.tabAdherents[i].adresse.rue, ' ', biblio.tabAdherents[i].adresse.numeroRue);
-            writeln(' |  |- Ville : ', biblio.tabAdherents[i].npa, ' ', biblio.tabAdherents[i].ville, ' - ', biblio.tabAdherents[i].pays);
+            writeln(' |  |- Ville : ', biblio.tabAdherents[i].adresse.npa, ' ', biblio.tabAdherents[i].adresse.ville, ' - ', biblio.tabAdherents[i].adresse.pays);
             
             if i < biblio.nbAdherents - 1 then
-                writeln(' |')
+                writeln(' |  -')
             else
                 writeln('_____');
         end;
@@ -179,7 +203,7 @@ implementation
             writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
             
             if i < biblio.nbEmprunts - 1 then
-                writeln(' |')
+                writeln(' |  ----')
             else
                 writeln('________');
         end;
