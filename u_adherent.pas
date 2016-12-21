@@ -1,43 +1,43 @@
-UNIT u_adherent;
-INTERFACE
-	CONST
+unit u_adherent;
+interface
+	const
 		Cmax = 100;
 		
-	TYPE
+	type
 	
-		Tadresse = RECORD
-			rue : STRING;
-			numeroRue : String;
-			npa : String;
-			ville : STRING;
-			pays : STRING;
-		END;
+		Tadresse = record
+			rue : string;
+			numeroRue : string;
+			npa : string;
+			ville : string;
+			pays : string;
+		end;
 		
-		Tadherent = RECORD
-		    codeAdherent : STRING;
-			nom : STRING;
-			prenom : STRING;
+		Tadherent = record
+		    codeAdherent : string;
+			nom : string;
+			prenom : string;
 			adresse : Tadresse;
-		END;	
+		end;	
 		
-		TypeTabAdherents = ARRAY[0..Cmax-1] OF Tadherent;
+		TypeTabAdherents = ARRAY[0..Cmax-1] of Tadherent;
 		
 		// Demande toutes les informations à l'utilisateur et retourne un nouveau adherent ayant les informations saisies
-		FUNCTION saisirAdherent():Tadherent;
+		function saisirAdherent():Tadherent;
 		// Affiche toutes les informations de l'adherent
-		PROCEDURE afficherAdherent(adherent:Tadherent);
+		procedure afficherAdherent(adherent:Tadherent);
 		
-IMPLEMENTATION
+implementation
 	
-	FUNCTION saisirAdherent():Tadherent;
-	BEGIN
+	function saisirAdherent():Tadherent;
+	begin
 		
-	END;
+	end;
 	
 	
-	PROCEDURE afficherAdherent(adherent:Tadherent);
-	BEGIN
+	procedure afficherAdherent(adherent:Tadherent);
+	begin
 		
-	END;
+	end;
 
-END.
+end.

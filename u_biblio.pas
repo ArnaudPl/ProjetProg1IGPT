@@ -1,138 +1,138 @@
-UNIT u_biblio;
-INTERFACE
-	USES u_livre, u_adherent;
+unit u_biblio;
+interface
+	uses u_livre, u_adherent;
 	
-	CONST
+	const
 		Cmax = 100;
 		
-	TYPE
+	type
 	
-		Tbibliotheque = RECORD
-			nomBiblio : STRING;
+		Tbibliotheque = record
+			nomBiblio : string;
 			tabLivres : TypeTabLivres;
-			nbLivres : INTEGER;
+			nbLivres : integer;
 			tabEmprunts : TypeTabEmprunts;
-			nbEmprunts : INTEGER;
+			nbEmprunts : integer;
 			tabAdherents : TypeTabAdherents;
-			nbAdherents : INTEGER;
+			nbAdherents : integer;
 			adresse : Tadresse;
-		END;
+		end;
 	
 	// Initialise les attributs de la bibliothèque
-	PROCEDURE initBiblio(var biblio:Tbibliotheque);
+	procedure initBiblio(var biblio:Tbibliotheque);
 	// Affiche l'ensemble des informations de la bibliothèque
-	PROCEDURE afficherBibliotheque(biblio:Tbibliotheque);
+	procedure afficherBibliotheque(biblio:Tbibliotheque);
 	// Permet de savoir si la bibliothèque est ouverte ou non ! Elle est ouverte du mardi au samedi de 8h à 12h et de 14h à 20h, et le lundi de 14h à 18h !
-	FUNCTION estOuverte(jour:String; heure:INTEGER):BOOLEAN;
+	function estOuverte(jour:string; heure:integer):boolean;
 	
 	// Ajoute un nouveau livre à la bibliothèque
-	FUNCTION ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : INTEGER; nouveauLivre : Tlivre) : BOOLEAN; 
+	function ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; nouveauLivre : Tlivre) : boolean; 
 	// Supprime le livre de la bibliothèque, à condition qu'il ne soit plus emprunté !
-	FUNCTION supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : INTEGER; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):BOOLEAN;
+	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
 	// Cherche le livre dans la bibliothèque et, s'il est trouvé, retourne sa position dans le tableau.
-	FUNCTION trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : INTEGER; livre:Tlivre; var indiceRetour:INTEGER):BOOLEAN;
+	function trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : integer; livre:Tlivre; var indiceRetour:integer):boolean;
 	// Cherche dans la bibliothèque le livre qui correspond à l'ISBN passé en paramètre
-	FUNCTION trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : INTEGER; isbn:STRING; var livre:Tlivre):BOOLEAN;
+	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
 	// Cherche dans la bibliothèque tous les livres qui contiennent le code d'auteur passé en paramètre
-	FUNCTION trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : INTEGER; codeAuteur:STRING; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:INTEGER):BOOLEAN;
+	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
 	
 	// Ajoute un nouvel adhérent à la bibliothèque
-	FUNCTION ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent) : BOOLEAN;
+	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
 	// Supprime de la bibliothèque l'adhérent passé en paramètre, à condition que celui-ci n'est plus d'emprunt à son code !
-	FUNCTION supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):BOOLEAN;
+	function supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
 	// Cherche l'adhérent dans la bibliothèque et, s'il est trouvé, retourne sa position dans le tableau.
-	FUNCTION trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent; var indiceRetour : INTEGER) : BOOLEAN;
+	function trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; var indiceRetour : integer) : boolean;
 	// Cherche dans la bibliothèque l'adhérent qui correspond au code passé en paramètre.
-	FUNCTION trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; codeAdherent:STRING; var adherentTrouve:Tadherent) : BOOLEAN;
+	function trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:integer; codeAdherent:string; var adherentTrouve:Tadherent) : boolean;
 	
 	// Crée un emprunt avec les informations passées en paramètres et l'ajoute à la liste des emprunts de la bibliothèque
-	FUNCTION emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):BOOLEAN;
+	function emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):boolean;
 	// Supprime l'emprunt de la liste des emprunts de la bibliothèque
-	FUNCTION rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; emprunt:Temprunt):BOOLEAN;
+	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean;
 	// Cherche l'emprunt dans la bibliothèque et, s'il est trouvé, retourne sa position dans le tableau
-	FUNCTION trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:INTEGER; emprunt:Temprunt; var indiceRetour : INTEGER):BOOLEAN; 
+	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean; 
 	// Cherche dans la bibliothèque l'emprunt qui correspond au numéro passé en paramètre
-	FUNCTION trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; var emprunt:Temprunt ;numero:INTEGER):BOOLEAN;
-	
-IMPLEMENTATION
+	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
 
-	PROCEDURE initBiblio(var biblio:Tbibliotheque);
-	BEGIN
+implementation
+
+	procedure initBiblio(var biblio:Tbibliotheque);
+	begin
 		
-	END;
+	end;
 	
-	PROCEDURE afficherBibliotheque(biblio:Tbibliotheque);
-	BEGIN
+	procedure afficherBibliotheque(biblio:Tbibliotheque);
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION estOuverte(jour:String; heure:INTEGER):BOOLEAN;
-	BEGIN
+	function estOuverte(jour:string; heure:integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : INTEGER; nouveauLivre : Tlivre) : BOOLEAN; 
-	BEGIN
+	function ajouterNouveauLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; nouveauLivre : Tlivre) : boolean; 
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : INTEGER; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):BOOLEAN;
-	BEGIN
+	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : INTEGER; livre:Tlivre; var indiceRetour:INTEGER):BOOLEAN;
-	BEGIN
+	function trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : integer; livre:Tlivre; var indiceRetour:integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : INTEGER; isbn:STRING; var livre:Tlivre):BOOLEAN;
-	BEGIN
+	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : INTEGER; codeAuteur:STRING; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:INTEGER):BOOLEAN;
-	BEGIN
+	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent) : BOOLEAN;
-	BEGIN
+	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : INTEGER):BOOLEAN;
-	BEGIN
+	function supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; adherent:Tadherent; var indiceRetour : INTEGER) : BOOLEAN;
-	BEGIN
+	function trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; var indiceRetour : integer) : boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:INTEGER; codeAdherent:STRING; var adherentTrouve:Tadherent) : BOOLEAN;
-	BEGIN
+	function trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:integer; codeAdherent:string; var adherentTrouve:Tadherent) : boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):BOOLEAN;
-	BEGIN
+	function emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):boolean;
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; emprunt:Temprunt):BOOLEAN; 
-	BEGIN
+	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean; 
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:INTEGER; emprunt:Temprunt; var indiceRetour : INTEGER):BOOLEAN; 
-	BEGIN
+	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean; 
+	begin
 		
-	END;
+	end;
 	
-	FUNCTION trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:INTEGER; var emprunt:Temprunt ;numero:INTEGER):BOOLEAN;
-	BEGIN
+	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
+	begin
 		
-	END;
-END.
+	end;
+end.

@@ -1,16 +1,15 @@
-PROGRAM p_biblio;
-USES u_biblio, u_livre, u_adherent, crt;
+program p_biblio;
+uses u_biblio, u_livre, u_adherent, crt;
 
-	PROCEDURE initProgram();
-	BEGIN
+	procedure initProgram();
+	begin
 		u_livre.initUnite();
-	END;
+	end;
 	
-	//Procedure chargeant déjà quelques données de base
-	PROCEDURE chargeDonneesInitiales(var biblio:Tbibliotheque; var adherent: Tadherent; var livre: Tlivre);
-	BEGIN
+	//Procedure chargeant quelques donées de base
+	procedure chargeDonneesInitiales(var biblio:Tbibliotheque; var adherent: Tadherent; var livre: Tlivre);
+	begin
 
-	
 		biblio.nomBiblio:='Arc Biblio';
 		biblio.adresse.rue:='Espace de l''Europe';
 		biblio.adresse.numeroRue:='21';
@@ -18,107 +17,105 @@ USES u_biblio, u_livre, u_adherent, crt;
 		biblio.adresse.ville:='Neuchatel';	
 		biblio.adresse.pays:='Suisse';
 	
-	
-		//TODO : à compléter avec quelques adhérents et quelques livres
+		//TODO : Compléter avec quelques adh곥nts et quelques livres
 		
-	END;
-
-VAR
+	end;
+var
 	biblio : Tbibliotheque;
-	choix : INTEGER;
+	choix : integer;
 	adherent : Tadherent;
 	livre : Tlivre;
 	date : Tdate;
-	numEmprunt : INTEGER;
+	numEmprunt : integer;
 	emprunt : Temprunt;
-	continuer : STRING;
-	heureOuvert : INTEGER;
-	jourOuvert : STRING;
-	indiceLivre : INTEGER;
+	continuer : string;
+	heureOuvert : integer;
+	jourOuvert : string;
+	indiceLivre : integer;
 	
 	// Attribut(s) d'un livre :
-	isbn:STRING;
+	isbn:string;
 
 	// Attribut(s) d'un adherent :
-	codeAdherent: STRING;
+	codeAdherent: string;
 
-BEGIN
+begin
 	initProgram(); // Va initialiser la variable globale compteurEmprunt a 0
 	u_biblio.initBiblio(biblio);
 
 	chargeDonneesInitiales(biblio, adherent, livre);
 	
-	REPEAT
-		BEGIN
-			WRITELN('Que souhaitez-vous faire ?');
-			WRITELN('1. Emprunter un livre');
-			WRITELN('2. Rendre un livre');
-			WRITELN('3. Verifier la disponibilite d''un livre');
-			WRITELN('4. Ajouter un livre a la bibliotheque');
-			WRITELN('5. Ajouter un exemplaire d''un livre');
-			WRITELN('6. Ajouter un nouvel adherent');
-			WRITELN('7. Recherche et affichage de livre(s)');
-			WRITELN('8. Recherche et affichage d''emprunt');
-			WRITELN('9. Recherche et affichage d''adherent');
-			WRITELN('10. Supprimer un exemplaire d''un livre');
-			WRITELN('11. Supprimer un livre');
-			WRITELN('12. Supprimer un adherent');
-			WRITELN('13. Verifier si la bibliotheque est ouverte');
-			WRITELN('14. Afficher toutes les informations de la bibliotheque');
-			WRITELN('0. Quitter l''application');
-			REPEAT
-				READLN(choix);
-			UNTIL (choix >= 0) AND (choix <= 14);
+	repeat
+		begin
+			writeln('Que souhaitez-vous faire ?');
+			writeln('1. Emprunter un livre');
+			writeln('2. Rendre un livre');
+			writeln('3. Verifier la disponibilite d''un livre');
+			writeln('4. Ajouter un livre a la bibliotheque');
+			writeln('5. Ajouter un exemplaire d''un livre');
+			writeln('6. Ajouter un nouvel adherent');
+			writeln('7. Recherche et affichage de livre(s)');
+			writeln('8. Recherche et affichage d''emprunt');
+			writeln('9. Recherche et affichage d''adherent');
+			writeln('10. Supprimer un exemplaire d''un livre');
+			writeln('11. Supprimer un livre');
+			writeln('12. Supprimer un adherent');
+			writeln('13. Verifier si la bibliotheque est ouverte');
+			writeln('14. Afficher toutes les informations de la bibliotheque');
+			writeln('0. Quitter l''application');
+			repeat
+				readln(choix);
+			until (choix >= 0) AND (choix <= 14);
 			
 			ClrScr;
-			CASE choix OF 
-				1 : BEGIN
+			case choix of 
+				1 : begin
 						
-					END;
-				2 : BEGIN
+					end;
+				2 : begin
 						
-					END;
-				3 : BEGIN
+					end;
+				3 : begin
 						
-					END;
-				4 : BEGIN
+					end;
+				4 : begin
 						
-					END;
-				5 : BEGIN
+					end;
+				5 : begin
 						
-					END;
-				6 : BEGIN
+					end;
+				6 : begin
 						
-					END;
-				7 : BEGIN
+					end;
+				7 : begin
 						
-					END;
-				8 : BEGIN
+					end;
+				8 : begin
 						
-					END;
-				9 : BEGIN
+					end;
+				9 : begin
 						
-					END;
-				10 : BEGIN
+					end;
+				10 : begin
 						
-					END;
-				11 : BEGIN
+					end;
+				11 : begin
 						
-					END;
-				12 : BEGIN
+					end;
+				12 : begin
 						
-					END;
-				13 : BEGIN
+					end;
+				13 : begin
 						
-					END;
-				14 : BEGIN
+					end;
+				14 : begin
 						
-					END;
-				0 : BEGIN
+					end;
+				0 : begin
 						
-					END;
-			END;
+					end;
+			end;
 			
-		END
-	UNTIL (choix = 0);
-END.
+		end
+	until (choix = 0);
+end.
