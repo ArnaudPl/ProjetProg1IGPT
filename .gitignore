@@ -1,0 +1,4 @@
+#Pas de fichiers binaires
+*.o
+#Pas d'executable
+*.exe
