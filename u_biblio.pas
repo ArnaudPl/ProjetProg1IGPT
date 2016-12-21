@@ -58,7 +58,10 @@ implementation
 
 	procedure initBiblio(var biblio:Tbibliotheque);
 	begin
-		
+        //Initialise tous les compteurs relatifs à un tableau
+		biblio.nbLivres = 0;
+        biblio.nbEmprunts = 0;
+        biblio.nbAdherents = 0;
 	end;
 	
 	procedure afficherBibliotheque(biblio:Tbibliotheque);
