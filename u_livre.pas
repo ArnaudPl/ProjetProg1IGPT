@@ -59,6 +59,7 @@ interface
 		
 		// Ajoute un exemplaire supplémentaire au livre passé en paramètre
 		procedure ajouterExemplaire(var livre:Tlivre);
+        
 		// Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
 		function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
@@ -117,7 +118,6 @@ implementation
         Auteur : Chritste Thibaud
         Date : 21.12.2016
     }
-    
 	procedure afficherLivre(livre:Tlivre);
 	begin
         writeln('ISBN : ', livre.isbn);
@@ -127,6 +127,7 @@ implementation
         writeln('Nombre d''exemplaire : ', livre.nbExemplaires);
 	end;
 	
+    
 	function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
 	begin
 		
@@ -137,9 +138,15 @@ implementation
 		
 	end;
 	
+    
+    {   Nom fonction :  ajouterExemplaire
+        Description : Ajout un exemplaire au livre
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
 	procedure ajouterExemplaire(var livre:Tlivre);
 	begin
-		
+        livre.nbExemplaires := livre.nbExemplaires + 1;
 	end;
 	
 	function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
