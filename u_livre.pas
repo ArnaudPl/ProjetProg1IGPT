@@ -71,7 +71,7 @@ interface
 		// Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
 		function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
 
-implementation	
+implementation
     
     {   Nom fonction :  initUnit
         Description : Initialise le unit u_livre
@@ -128,16 +128,33 @@ implementation
 	end;
 	
     
+    
+    {   Nom fonction :  creerEmprunt
+        Description : Créé un emprunt avec un numéro unique et l'ajoute dans le tableau des emprunts
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
 	function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
-	begin
-		
+	var
+        emprunt : Temprunt;
+    begin
+        compteurEmprunt := compteurEmprunt + 1;      //On incrémente le nombre d'emprunts ce qui donnera un identifiant unique à l'emprunt
+                                                     // Correct de le faire à la création de l'emprunt ou alors faut-il le faire dans l'emprunt (biblio)
+        emprunt.numeroEmprunt := compteurEmprunt;
+        emprunt.livre := livre;
+        emprunt.adherent := adherent;
+        emprunt.dateEmprunt := date;
+        
+        creerEmprunt := emprunt       
 	end;
+    
 	
 	procedure afficherEmprunt(emprunt:Temprunt);
 	begin
 		
 	end;
 	
+    
     
     {   Nom fonction :  ajouterExemplaire
         Description : Ajout un exemplaire au livre
@@ -173,5 +190,5 @@ implementation
 	begin
 		
 	end;
-	
+    
 end.
