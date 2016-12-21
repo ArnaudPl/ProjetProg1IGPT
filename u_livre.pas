@@ -1,3 +1,11 @@
+{
+Nom : 
+Descritpion : 
+Auteur : Christe Thibaud
+Date création : 21.12.2016
+Dernière modification : 21.12.2016
+}
+
 unit u_livre;
 interface
 	uses u_adherent;
@@ -17,7 +25,7 @@ interface
 			nbExemplaires : integer; // Par exemple, la bibliothèque peut posséder trois exemplaires du petit larousse illustré 2013
 		end;
 		
-		TypeTabLivres = ARRAY[0..Cmax-1] OF Tlivre;
+		TypeTabLivres = array[0..Cmax-1] of Tlivre;
 		
 		Tdate = record
 			jour : integer;
@@ -61,7 +69,7 @@ interface
 implementation	
 	procedure initUnite();
 	begin
-		
+        compteurEmprunt := 0;
 	end;
 
 	function saisirLivre(): Tlivre;
