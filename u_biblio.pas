@@ -152,7 +152,7 @@ implementation
         emprunt : Temprunt;
 	begin
         emprunterLivre := false;
-		if tabEmprunts < Cmax - 1 then
+		if nbEmprunts < Cmax - 1 then
             begin
                 emprunt := u_livre.creerEmprunt(livre, adherent, dateEmprunt);
                 tabEmprunts[nbEmprunts] := emprunt;
