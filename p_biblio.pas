@@ -109,7 +109,7 @@ begin
 						
 					end;
 				14 : begin
-						
+				        afficherBibliotheque(biblio);
 					end;
 				0 : begin
 						
