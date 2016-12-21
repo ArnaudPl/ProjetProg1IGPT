@@ -1,4 +1,5 @@
 #Pas de fichiers binaires
 *.o
+*.ppu
 #Pas d'executable
 *.exe
