@@ -44,12 +44,16 @@ interface
 		
 		// Initialise l'unité, en mettant le compteur d'emprunts à 0
 		procedure initUnite();
+        
 		// Demande toutes les informations à l'utilisateur et retourne un nouveau livre ayant les informations saisies
 		function saisirLivre():Tlivre;
+        
 		// Affiche toutes les informations du livre
 		procedure afficherLivre(livre:Tlivre);
+        
 		// Retourne un nouvel emprunt contenant les informations passées en paramètres et un numéro unique (grâce à compteurEmprunt)
 		function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
+        
 		// Affiche les informations principales de l'emprunt
 		procedure afficherEmprunt(emprunt:Temprunt);
 		
@@ -67,11 +71,23 @@ interface
 		function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
 
 implementation	
-	procedure initUnite();
+    
+    {   Nom fonction :  initUnit
+        Description : Initialise le unit u_livre
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
+    procedure initUnite();
 	begin
         compteurEmprunt := 0;
 	end;
 
+
+    {   Nom fonction :  saisirLivre
+        Description : Permet de saisir un livre et le retourne
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
 	function saisirLivre(): Tlivre;
     var
         livreSaisi : Tlivre;
@@ -96,10 +112,19 @@ implementation
 	end;
 	
 
-	
+    {   Nom fonction :  afficherLivre
+        Description : Affiche le livre passé en paramètre
+        Auteur : Chritste Thibaud
+        Date : 21.12.2016
+    }
+    
 	procedure afficherLivre(livre:Tlivre);
 	begin
-		
+        writeln('ISBN : ', livre.isbn);
+        writeln('Titre : ', livre.titre);
+        writeln('Auteur : ', livre.codeAuteur);
+        writeln('Nombre de pages : ', livre.nbPages);
+        writeln('Nombre d''exemplaire : ', livre.nbExemplaires);
 	end;
 	
 	function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
