@@ -191,8 +191,31 @@ implementation
 	end;
 	
 	function supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+    var
+        i : integer;
+        indiceAdherent : integer;
 	begin
-		
+		supprimerAdherent := false;
+        
+        // Vérifie d'abord qu'il y ait des adhérents
+        if nbAdherents > 0 then
+        begin
+            //Vérifie ensuite que celui-ci n'a pas un emprunt actif
+            if u_livre.compteEmpruntsParAdherent(tabEmprunt, nbEmprunts, adherent) = 0 then
+            begin
+                //Trouve l'adhérent dans la liste
+                if trouverIndiceAdherent(tabAdherents, nbAdherents, adherent, indiceAdherent) then
+                begin
+                    //Le supprime et met à jour le nombre d'adhérents
+                    for i := indiceAdherent to nbAdherents - 2 do
+                    begin
+                        tabAdherents[i] := tabAdherents[i + 1];
+                    end;
+                    nbAdherents := nbAdherents - 1;
+                    supprimerAdherent := true;
+                end;
+            end;
+        end;
 	end;
 	
 	function trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; var indiceRetour : integer) : boolean;
