@@ -157,8 +157,25 @@ implementation
 	end;
 	
 	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverLivresParAuteur := false;
+        
+		if nbLivres > 0 then
+        begin
+            for i := 0 to nbLivres - 1 do
+            begin
+                if tabLivres[i].codeAuteur = codeAuteur then
+                begin
+                    tabLivresTrouves[nbLivresTrouves] := tabLivres[i];
+                    nbLivresTrouves := nbLivresTrouves + 1;
+                end;
+            end;
+        end;
+        
+        if nbLivresTrouves > 0 then
+            trouverLivresParAuteur := true;
 	end;
 	
 	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
