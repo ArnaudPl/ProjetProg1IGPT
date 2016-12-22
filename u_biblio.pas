@@ -108,8 +108,25 @@ implementation
 	end;
 	
 	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+    var
+        indiceLivre : integer;
+        i : integer;
 	begin
-		
+		supprimerLivre := false;
+        i := 0;
+        
+        if trouverIndiceLivre(tabLivres, nbLivres, livre, indiceLivre) then
+        begin
+            if u_livre.compteExemplairesEmpruntes(livre, tabEmprunt, nbEmprunts) = 0 then
+            begin
+                for i := indiceLivre to nbLivres - 2 do
+                begin
+                    tabLivres[i] := tabLivres[i + 1];
+                end;
+                nbLivres := nbLivres - 1;
+                supprimerLivre := true;
+            end;
+        end;
 	end;
 	
 	function trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : integer; livre:Tlivre; var indiceRetour:integer):boolean;
