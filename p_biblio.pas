@@ -107,20 +107,30 @@ begin
                                 readln(date.annee);
                                 
                                 if emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
-                                begin
-                                    writeln('Emprunt effectué !');
-                                end
+                                    writeln('Emprunt effectue !')
                                 else
-                                    writeln('L''emprunt n''a pas pu être effectué.');
+                                    writeln('L''emprunt n''a pas pu etre effectue.');
                             end
                             else
                                 writeln('Erreur - Aucun livre ne correspond à cet ISBN.');
                         end
                         else
-                            writeln('Erreur - Aucun adhérent trouvé.');
+                            writeln('Erreur - Aucun adherent trouve.');
 					end;
 				2 : begin
-						
+						writeln('-- Rendre un livre --');
+						write('Veuillez entrer le numero de l''emprunt : ');
+                        readln(numEmprunt);
+                        
+                        if trouverEmpruntParNumero(biblio.tabEmprunts, biblio.nbEmprunts, emprunt, numEmprunt) then
+                        begin
+                            if rendreLivre(biblio.tabEmprunts, biblio.nbEmprunts, emprunt) then
+                                writeln('Le livre a ete rendu !')
+                            else
+                                writeln('Le livre n''a pas pu etre rendu.');
+                        end
+                        else
+                            writeln('Erreur - Aucun emprunt ne correspond a ce numero.');
 					end;
 				3 : begin
 						
