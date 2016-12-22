@@ -219,8 +219,25 @@ implementation
 	end;
 	
 	function trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; var indiceRetour : integer) : boolean;
+    var
+        i : integer;
 	begin
-		
+        trouverIndiceAdherent := false;
+        i := 0;
+        
+		if nbAdherents > 0 then
+        begin
+            while ((i <= nbAdherents - 1) or (trouverIndiceAdherent = false)) do
+            begin
+                if tabAdherents[i].codeAdherent = adherent.codeAdherent then
+                begin
+                    indiceRetour := i;
+                    trouverIndiceAdherent := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:integer; codeAdherent:string; var adherentTrouve:Tadherent) : boolean;
