@@ -293,19 +293,64 @@ implementation
             end;
 	end;
 	
-	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean; 
+	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean;
+    var
+        indiceEmprunt : integer;
+        i : integer;
 	begin
-		
+		rendreLivre := false;
+        
+        if trouverIndiceEmprunt(tabEmprunts, nbEmprunts, emprunt, indiceEmprunt) then
+        begin
+            for i := indiceEmprunt to nbEmprunts - 2 do
+            begin
+                tabEmprunts[i] := tabEmprunts[i + 1];
+            end;
+            nbEmprunts := nbEmprunts - 1;
+            rendreLivre := true;
+        end;
 	end;
 	
-	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean; 
+	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean;
+    var
+        i : integer;
 	begin
-		
+        trouverIndiceEmprunt := false;
+        i := 0;
+        
+        if nbEmprunts > 0 then
+        begin
+            while ((i <= nbEmprunts - 1) or (trouverIndiceEmprunt = false)) do
+            begin
+                if (tabEmprunts[i].numeroEmprunt = emprunt.numeroEmprunt) then
+                begin
+                    indiceRetour := i;
+                    trouverIndiceEmprunt := true;
+                end;
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverEmpruntParNumero := false;
+        i := 0;
+        
+        if nbEmprunts > 0 then
+        begin
+            while ((i <= nbEmprunts - 1) or (trouverEmpruntParNumero = false)) do
+            begin
+                if (tabEmprunts[i].numeroEmprunt = numero) then
+                begin
+                    emprunt := tabEmprunts[i];
+                    trouverEmpruntParNumero := true;
+                end;
+                i := i + 1;
+            end;
+        end;
 	end;
     
     //Procédures et fonctions privées
