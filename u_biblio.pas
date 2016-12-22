@@ -113,8 +113,24 @@ implementation
 	end;
 	
 	function trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : integer; livre:Tlivre; var indiceRetour:integer):boolean;
+    var
+        i : integer;
 	begin
-		
+        trouverIndiceLivre := false;
+        i := 0;
+        
+		if nbLivres > 0 then
+        begin
+            begin
+                if tabLivres[i].isbn = livre.isbn then
+                begin
+                    indiceRetour := i;
+                    trouverIndiceLivre := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
