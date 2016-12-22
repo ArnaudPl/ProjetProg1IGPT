@@ -208,7 +208,31 @@ begin
 						
 					end;
 				10 : begin
-						
+                     writeln('-- Suppression d''un exemplaire d''un livre --');
+                     write('Veuillez enter l''ISBN du livre : ');
+                     readln(isbn);
+                     
+                     
+                    if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
+                        begin
+                            if(livre.nbExemplaires <= 1) then
+                                begin
+                                    if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
+                                        writeln('Supression effectué !')
+                                    else
+                                        writeln('Erreur - le livre n''a pas pu etre supprime.')
+                                end
+                            else
+                                if(u_livre.supprimerExemplaire(livre,biblio.tabEmprunts, biblio.nbEmprunts)) then
+                                        writeln('Supression effectué') 
+                                else
+                                        writeln('Erreur - la suppression n''a pas pu s''effectuer.')
+                                end
+                    else
+                        writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
+                    
+                     
+                    	
 					end;
 				11 : begin
                     writeln('-- Suppression d''un livre --');
