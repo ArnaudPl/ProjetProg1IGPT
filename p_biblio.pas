@@ -190,6 +190,16 @@ begin
 						
 					end;
 				11 : begin
+                    writeln('-- Suppression d''un livre --');
+                    write('Veuillez saisir l''ISBN du livre : ');
+                    readln(isbn);
+                    if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
+                        if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
+                            writeln('Supression effectué !')
+                        else
+                             writeln('Erreur - le livre n''a pas pu etre supprime.')
+                    else
+                        writeln('Erreur - Aucn livre ne correspond à cet isbn.');
 						
 					end;
 				12 : begin
@@ -199,8 +209,10 @@ begin
                          
                          if(u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
                             begin
-                                u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts);
-                                writeln('Supression effectué !');
+                                if(u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts)) then
+                                    writeln('Supression effectué !')
+                                else
+                                    writeln('Erreur -  l''adherent n''a pas pu etre supprime.');
                             end
                          else
                             begin
