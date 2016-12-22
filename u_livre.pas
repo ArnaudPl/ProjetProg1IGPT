@@ -54,17 +54,14 @@ interface
 		procedure afficherEmprunt(emprunt:Temprunt);
 		// Ajoute un exemplaire supplémentaire au livre passé en paramètre
 		procedure ajouterExemplaire(var livre:Tlivre);
-        
         // Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
 		function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
-        
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
 		function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
         // Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
 		function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
         // Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
 		function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
-		
         // Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
 		function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
 
@@ -173,9 +170,24 @@ implementation
 	end;
 	
     
+    {   Nom fonction :  supprimerExemplaire
+        Description : Supprime un exemplaire d un livre à condition qu il y en a un et qu il soit disponible
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
-	begin
-		
+	var
+        deroulementOK : boolean;
+    begin
+    
+        deroulementOK := false;
+        if ((livre.nbExemplaires > 0) and (compteExemplairesDisponibles(livre,tabEmprunt,nbEmprunts) > 0)) then
+            begin    
+                livre.nbExemplaires := livre.nbExemplaires -1;
+                deroulementOK := true;
+            end; 
+    
+		supprimerExemplaire := deroulementOK;
 	end;
     
 	
