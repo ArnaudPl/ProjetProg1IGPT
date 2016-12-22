@@ -142,7 +142,7 @@ begin
 					end;
 				3 : begin
 						writeln('-- Verification de la disponibilite du livre --');
-                        write('Veuillez enter l''ISBN du livre : ');
+                        write('Veuillez entrer l''ISBN du livre : ');
                         readln(isbn);
                         
                         if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
@@ -163,7 +163,7 @@ begin
 					end;
 				5 : begin
 						writeln('-- Ajout d''un exemplaire d''un  livre --');
-                        write('Veuillez enter l''ISBN du livre : ');
+                        write('Veuillez entrer l''ISBN du livre : ');
                         readln(isbn);
                         
                         if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
@@ -183,7 +183,23 @@ begin
                             writeln('L''adherent n''a pas pu etre ajoute.');
 					end;
 				7 : begin
-						
+						writeln('-- Recherche et affichage de livre(s) --');
+                        continuer := 'go';
+                        repeat
+                            write('Veuillez entrer l''ISBN du livre : ');
+                            readln(isbn);
+                            
+                            if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
+                            begin
+                                u_livre.afficherLivre(livre);
+                            end
+                            else
+                                writeln('Le livre n''a pas ete trouve.');
+                                
+                            write('Entrez "stop" pour arreter ou "go" pour continuer : ');
+                            readln(continuer);
+                        until (continuer = 'stop');
+                        ClrScr;
 					end;
 				8 : begin
 						
@@ -214,8 +230,8 @@ begin
                          
                          if(u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
                             begin
-                                u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts);
-                                writeln('Supression effectuee !')
+                                if (u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts)) then
+                                    writeln('Supression effectuee !')
                                 else
                                     writeln('Erreur -  l''adherent n''a pas pu etre supprime.');
                             end
