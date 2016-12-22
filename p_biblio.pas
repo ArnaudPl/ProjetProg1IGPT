@@ -202,7 +202,21 @@ begin
                         ClrScr;
 					end;
 				8 : begin
-						
+						writeln('-- Recherche et affichage d''emprunts --');
+                        continuer := 'go';
+                        repeat
+                            write('Veuillez entrer le numero d''emprunt : ');
+                            readln(numEmprunt);
+                            
+                            if u_biblio.trouverEmpruntParNumero(biblio.tabEmprunts, biblio.nbEmprunts, emprunt, numEmprunt) then
+                                u_livre.afficherEmprunt(emprunt)
+                            else
+                                writeln('L''emprunt n''a pas pu etre trouve.');
+                                
+                            write('Entrez "stop" pour arreter ou "go" pour continuer : ');
+                            readln(continuer);
+                        until (continuer = 'stop');
+                        ClrScr;
 					end;
 				9 : begin
 						
