@@ -298,9 +298,25 @@ implementation
 		
 	end;
 	
-	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean; 
+	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean;
+    var
+        i : integer;
 	begin
-		
+        trouverIndiceEmprunt := false;
+        i := 0;
+        
+        if nbEmprunts > 0 then
+        begin
+            while ((i <= nbEmprunts - 1) or (trouverIndiceEmprunt = false)) do
+            begin
+                if (tabEmprunts[i].numeroEmprunt = emprunt.numeroEmprunt) then
+                begin
+                    indiceRetour := i;
+                    trouverIndiceEmprunt := true;
+                end;
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
