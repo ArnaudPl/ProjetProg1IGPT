@@ -73,6 +73,8 @@ implementation
 	begin
         ClrScr;
 		writeln('Affichage de ', biblio.nomBiblio, ' :');
+        writeln('Adresse : ', biblio.adresse.rue, ' n°', biblio.adresse.numeroRue);
+        writeln('Ville : ', biblio.adresse.npa, ' ', biblio.adresse.ville, ' - ', biblio.adresse.pays);
         afficheAdherents(biblio);
         writeln('');
         afficheEmprunts(biblio);
@@ -358,40 +360,50 @@ implementation
     var
         i : integer;
     begin
-        writeln('Affichage des ', biblio.nbAdherents, ' adhérents');
-        for i := 0 to biblio.nbAdherents - 1 do
+        if biblio.nbAdherents > 0 then
         begin
-            writeln(' |- ', biblio.tabAdherents[i].nom, ' ', biblio.tabAdherents[i].prenom);
-            writeln(' |  |- Code : ', biblio.tabAdherents[i].codeAdherent);
-            writeln(' |  |- Adresse : ', biblio.tabAdherents[i].adresse.rue, ' ', biblio.tabAdherents[i].adresse.numeroRue);
-            writeln(' |  |- Ville : ', biblio.tabAdherents[i].adresse.npa, ' ', biblio.tabAdherents[i].adresse.ville, ' - ', biblio.tabAdherents[i].adresse.pays);
-            
-            if i < biblio.nbAdherents - 1 then
-                writeln(' |  -')
-            else
-                writeln('_____');
-        end;
+            writeln('Affichage des ', biblio.nbAdherents, ' adherents');
+            for i := 0 to biblio.nbAdherents - 1 do
+            begin
+                writeln(' |- ', biblio.tabAdherents[i].nom, ' ', biblio.tabAdherents[i].prenom);
+                writeln(' |  |- Code : ', biblio.tabAdherents[i].codeAdherent);
+                writeln(' |  |- Adresse : ', biblio.tabAdherents[i].adresse.rue, ' ', biblio.tabAdherents[i].adresse.numeroRue);
+                writeln(' |  |- Ville : ', biblio.tabAdherents[i].adresse.npa, ' ', biblio.tabAdherents[i].adresse.ville, ' - ', biblio.tabAdherents[i].adresse.pays);
+
+                if i < biblio.nbAdherents - 1 then
+                    writeln(' |  -')
+                else
+                    writeln('_____');
+            end;
+        end
+        else
+            writeln('Aucun adherent pour le moment.');
     end;
     
     procedure afficheEmprunts(biblio:Tbibliotheque);
     var
         i : integer;
     begin
-        writeln('Affichage des ', biblio.nbEmprunts, ' emprunts');
-        for i := 0 to biblio.nbEmprunts - 1 do
+        if biblio.nbEmprunts > 0 then
         begin
-            writeln(' |- ', biblio.tabEmprunts[i].numeroEmprunt);
-            writeln(' |  |- Livre : ', biblio.tabEmprunts[i].livre.titre);
-            writeln(' |  |  |- ISBN : ', biblio.tabEmprunts[i].livre.isbn);
-            writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
-            writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
-            writeln(' |  |- Adhérent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
-            writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
-            
-            if i < biblio.nbEmprunts - 1 then
-                writeln(' |  ----')
-            else
-                writeln('________');
-        end;
+            writeln('Affichage des ', biblio.nbEmprunts, ' emprunts');
+            for i := 0 to biblio.nbEmprunts - 1 do
+            begin
+                writeln(' |- ', biblio.tabEmprunts[i].numeroEmprunt);
+                writeln(' |  |- Livre : ', biblio.tabEmprunts[i].livre.titre);
+                writeln(' |  |  |- ISBN : ', biblio.tabEmprunts[i].livre.isbn);
+                writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
+                writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
+                writeln(' |  |- Adhérent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
+                writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
+
+                if i < biblio.nbEmprunts - 1 then
+                    writeln(' |  ----')
+                else
+                    writeln('________');
+            end;
+        end
+        else
+            writeln('Aucun emprunt realise.')
     end;
 end.

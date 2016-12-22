@@ -146,7 +146,12 @@ begin
                             writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
 					end;
 				4 : begin
-						
+						writeln('-- Ajouter un livre a la bibliotheque --');
+                        livre := u_livre.saisirLivre();
+                        if ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre) then
+                            writeln('Le livre a ete ajoute !')
+                        else
+                            writeln('Le livre n''a pas pu etre ajoute !');
 					end;
 				5 : begin
 						
