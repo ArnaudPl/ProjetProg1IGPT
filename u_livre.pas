@@ -44,24 +44,18 @@ interface
 		
 		// Initialise l'unité, en mettant le compteur d'emprunts à 0
 		procedure initUnite();
-        
-		// Demande toutes les informations à l'utilisateur et retourne un nouveau livre ayant les informations saisies
+        // Demande toutes les informations à l'utilisateur et retourne un nouveau livre ayant les informations saisies
 		function saisirLivre():Tlivre;
-        
-		// Affiche toutes les informations du livre
+        // Affiche toutes les informations du livre
 		procedure afficherLivre(livre:Tlivre);
-        
-		// Retourne un nouvel emprunt contenant les informations passées en paramètres et un numéro unique (grâce à compteurEmprunt)
+        // Retourne un nouvel emprunt contenant les informations passées en paramètres et un numéro unique (grâce à compteurEmprunt)
 		function creerEmprunt(livre:Tlivre; adherent:Tadherent; date:Tdate):Temprunt;
-        
-		// Affiche les informations principales de l'emprunt
+        // Affiche les informations principales de l'emprunt
 		procedure afficherEmprunt(emprunt:Temprunt);
-		
 		// Ajoute un exemplaire supplémentaire au livre passé en paramètre
 		procedure ajouterExemplaire(var livre:Tlivre);
         
-        
-		// Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
+        // Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
 		function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
         
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
@@ -69,6 +63,7 @@ interface
         
 		// Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
 		function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
+        
 		// Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
 		function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
 		// Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
@@ -194,6 +189,24 @@ implementation
 	function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
 	var
         disponible : boolean;
+    begin
+        if(compteExemplairesDisponibles(livre,tabEmprunt,nbEmprunts) > 0) then
+            disponible := true
+        else
+            disponible := false;
+        
+        estDisponible := disponible;
+	end;
+	
+    
+    {  Nom fonction :  compteExemplairesDisponibles
+        Description : Compte le nombre d exemplaire encore disponible
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
+	function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer; // Retourne le nombre d'exemplaires encore disponibles
+	var
+        disponible : boolean;
         ind : integer;
         nbExemplairesDispo : integer;
     begin
@@ -207,22 +220,11 @@ implementation
                 nbExemplairesDispo :=  nbExemplairesDispo - 1;
             end;
             ind := ind + 1;
-        end;
-        
-        if(nbExemplairesDispo > 0) then
-            disponible := true
-        else
-            disponible := false;
-        
-        
-        estDisponible := disponible;
+        end;        
+        compteExemplairesDisponibles := nbExemplairesDispo;
 	end;
-	
-	function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer; // Retourne le nombre d'exemplaires encore disponibles		
-	begin
-		
-	end;
-	
+    
+    
 	function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
 	begin
 		
