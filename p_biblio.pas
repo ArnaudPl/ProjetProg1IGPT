@@ -104,13 +104,18 @@ begin
                                 write('Mois : ');
                                 readln(date.mois);
                                 write('Année : ');
-                                readln(date.année);
+                                readln(date.annee);
                                 
-                                
-                            end;
+                                if emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
+                                begin
+                                    writeln('Emprunt effectué !');
+                                end
+                                else
+                                    writeln('L''emprunt n''a pas pu être effectué.');
+                            end
                             else
                                 writeln('Erreur - Aucun livre ne correspond à cet ISBN.');
-                        end;
+                        end
                         else
                             writeln('Erreur - Aucun adhérent trouvé.');
 					end;
