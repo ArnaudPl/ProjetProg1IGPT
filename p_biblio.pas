@@ -99,12 +99,12 @@ begin
                         write('Veuillez entrer le code de l''adherent : ');
                         readln(codeAdherent);
                         
-                        if (u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
+                        if u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent) then
                         begin
                             write('Veuillez saisir l''ISBN du livre : ');
                             readln(isbn);
                             
-                            if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
+                            if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                             begin
                                 writeln('Veuillez saisir la date de l''emprunt :');
                                 write('Jour : ');
@@ -114,7 +114,7 @@ begin
                                 write('Année : ');
                                 readln(date.annee);
                                 
-                                if emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
+                                if u_biblio.emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
                                     writeln('Emprunt effectue !')
                                 else
                                     writeln('L''emprunt n''a pas pu etre effectue.');
@@ -130,9 +130,9 @@ begin
 						write('Veuillez entrer le numero de l''emprunt : ');
                         readln(numEmprunt);
                         
-                        if trouverEmpruntParNumero(biblio.tabEmprunts, biblio.nbEmprunts, emprunt, numEmprunt) then
+                        if u_biblio.trouverEmpruntParNumero(biblio.tabEmprunts, biblio.nbEmprunts, emprunt, numEmprunt) then
                         begin
-                            if rendreLivre(biblio.tabEmprunts, biblio.nbEmprunts, emprunt) then
+                            if u_biblio.rendreLivre(biblio.tabEmprunts, biblio.nbEmprunts, emprunt) then
                                 writeln('Le livre a ete rendu !')
                             else
                                 writeln('Le livre n''a pas pu etre rendu.');
@@ -145,7 +145,7 @@ begin
                         write('Veuillez enter l''ISBN du livre : ');
                         readln(isbn);
                         
-                        if trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
+                        if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                             if estDisponible(livre, biblio.tabEmprunts, biblio.nbEmprunts) then
                                 writeln('Le livre est disponible !')
                             else
@@ -156,7 +156,7 @@ begin
 				4 : begin
 						writeln('-- Ajouter un livre a la bibliotheque --');
                         livre := u_livre.saisirLivre();
-                        if ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre) then
+                        if u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre) then
                             writeln('Le livre a ete ajoute !')
                         else
                             writeln('Le livre n''a pas pu etre ajoute !');
@@ -166,16 +166,21 @@ begin
                         write('Veuillez enter l''ISBN du livre : ');
                         readln(isbn);
                         
-                        if trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
+                        if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                         begin
-                            ajouterExemplaire(livre);
+                            u_livre.ajouterExemplaire(livre);
                             writeln('Un exemplaire a ete ajoute !');
                         end
                         else
                             writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
 					end;
 				6 : begin
-						
+						writeln('-- Ajout d''un nouvel adherent --');
+                        adherent := u_adherent.saisirAdherent();
+                        if u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent) then
+                            writeln('Adherent ajoute !')
+                        else
+                            writeln('L''adherent n''a pas pu etre ajoute.');
 					end;
 				7 : begin
 						
@@ -194,17 +199,17 @@ begin
 					end;
 				12 : begin
 						 writeln('-- Suppression d''un adherent --');
-                         write('Veuillez saisir le cod de l''adherent : ');
+                         write('Veuillez saisir le code de l''adherent : ');
                          readln(codeAdherent);
                          
                          if(u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
                             begin
                                 u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts);
-                                writeln('Supression effectué !');
+                                writeln('Supression effectuee !');
                             end
                          else
                             begin
-                                writeln('Erreur - Aucun adherent ne correspond à ce code.');
+                                writeln('Erreur - Aucun adherent ne correspond a ce code.');
                             end;
                             
 					end;
