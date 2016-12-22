@@ -206,7 +206,6 @@ implementation
     }
 	function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer; // Retourne le nombre d'exemplaires encore disponibles
 	var
-        disponible : boolean;
         ind : integer;
         nbExemplairesDispo : integer;
     begin
@@ -224,10 +223,17 @@ implementation
         compteExemplairesDisponibles := nbExemplairesDispo;
 	end;
     
-    
+    {   Nom fonction :  compteExemplairesEmpruntes
+        Description : Compte le nombre d exemplaire déjà emprunté
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
-	begin
-		
+	var 
+        nbExemplaireEmpruntes : integer;
+    begin
+        nbExemplaireEmpruntes := livre.nbExemplaires - compteExemplairesDisponibles(livre,tabEmprunt,nbEmprunts);
+        compteExemplairesEmpruntes := nbExemplaireEmpruntes;
 	end;
 	
 	function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
