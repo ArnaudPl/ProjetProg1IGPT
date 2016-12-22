@@ -121,6 +121,7 @@ implementation
         
 		if nbLivres > 0 then
         begin
+            while ((i <= nbLivres - 1) or (trouverIndiceLivre = false)) do
             begin
                 if tabLivres[i].isbn = livre.isbn then
                 begin
