@@ -60,10 +60,13 @@ interface
 		// Ajoute un exemplaire supplémentaire au livre passé en paramètre
 		procedure ajouterExemplaire(var livre:Tlivre);
         
+        
 		// Supprime un exemplaire au livre passé en paramètre, à condition qu'il reste un moins un exemplaire du livre qui ne soit pas déjà emprunté !
 		function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
+        
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
-		function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
+		function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
+        
 		// Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
 		function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
 		// Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
@@ -175,15 +178,44 @@ implementation
         livre.nbExemplaires := livre.nbExemplaires + 1;
 	end;
 	
+    
 	function supprimerExemplaire(var livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
 	begin
 		
 	end;
     
 	
+    
+    {   Nom fonction :  estDisponible
+        Description : Vérifie si le livre est disponible
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean; 
-	begin
-		
+	var
+        disponible : boolean;
+        ind : integer;
+        nbExemplairesDispo : integer;
+    begin
+        nbExemplairesDispo := livre.nbExemplaires;
+        ind := 0;
+        
+        while((ind <= nbEmprunts-1) and (nbExemplairesDispo > 0)) do
+        begin
+            if(tabEmprunt[ind].livre.isbn = livre.isbn) then
+            begin
+                nbExemplairesDispo :=  nbExemplairesDispo - 1;
+            end;
+            ind := ind + 1;
+        end;
+        
+        if(nbExemplairesDispo > 0) then
+            disponible := true
+        else
+            disponible := false;
+        
+        
+        estDisponible := disponible;
 	end;
 	
 	function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer; // Retourne le nombre d'exemplaires encore disponibles		
