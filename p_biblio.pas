@@ -167,10 +167,10 @@ begin
                         readln(isbn);
                         
                         if trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
-                            if ajouterExemplaire(livre) then
-                                writeln('Un exemplaire a ete ajoute !')
-                            else
-                                writeln('L''exemplaire n''a pas pu etre ajoute.')
+                        begin
+                            ajouterExemplaire(livre);
+                            writeln('Un exemplaire a ete ajoute !');
+                        end
                         else
                             writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
 					end;
