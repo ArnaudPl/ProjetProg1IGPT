@@ -55,7 +55,7 @@ var
 
 	// Attribut(s) d'un adherent :
 	codeAdherent: string;
-
+    
 begin
 	initProgram(); // Va initialiser la variable globale compteurEmprunt a 0
 	u_biblio.initBiblio(biblio);
@@ -170,7 +170,20 @@ begin
 						
 					end;
 				12 : begin
-						
+						 writeln('-- Suppression d''un adherent --');
+                         write('Veuillez saisir le cod de l''adherent : ');
+                         readln(codeAdherent);
+                         
+                         if(u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
+                            begin
+                                u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts);
+                                writeln('Supression effectué !');
+                            end
+                         else
+                            begin
+                                writeln('Erreur - Aucun adherent ne correspond à ce code.');
+                            end;
+                            
 					end;
 				13 : begin
                         writeln('-- Verification si la bibliotheque est ouverte --');
