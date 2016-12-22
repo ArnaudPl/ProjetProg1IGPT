@@ -108,8 +108,25 @@ implementation
 	end;
 	
 	function supprimerLivre(var tabLivres : TypeTabLivres; var nbLivres : integer; livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+    var
+        indiceLivre : integer;
+        i : integer;
 	begin
-		
+		supprimerLivre := false;
+        i := 0;
+        
+        if trouverIndiceLivre(tabLivres, nbLivres, livre, indiceLivre) then
+        begin
+            if u_livre.compteExemplairesEmpruntes(livre, tabEmprunt, nbEmprunts) = 0 then
+            begin
+                for i := indiceLivre to nbLivres - 2 do
+                begin
+                    tabLivres[i] := tabLivres[i + 1];
+                end;
+                nbLivres := nbLivres - 1;
+                supprimerLivre := true;
+            end;
+        end;
 	end;
 	
 	function trouverIndiceLivre(tabLivres : TypeTabLivres; nbLivres : integer; livre:Tlivre; var indiceRetour:integer):boolean;
@@ -135,33 +152,131 @@ implementation
 	end;
 	
 	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverLivreParISBN := false;
+        i := 0;
+        
+		if nbLivres > 0 then
+        begin
+            while ((i <= nbLivres - 1) or (trouverLivreParISBN = false)) do
+            begin
+                if tabLivres[i].isbn = isbn then
+                begin
+                    livre := tabLivres[i];
+                    trouverLivreParISBN := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverLivresParAuteur := false;
+        
+		if nbLivres > 0 then
+        begin
+            for i := 0 to nbLivres - 1 do
+            begin
+                if tabLivres[i].codeAuteur = codeAuteur then
+                begin
+                    tabLivresTrouves[nbLivresTrouves] := tabLivres[i];
+                    nbLivresTrouves := nbLivresTrouves + 1;
+                end;
+            end;
+        end;
+        
+        if nbLivresTrouves > 0 then
+            trouverLivresParAuteur := true;
 	end;
 	
 	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
 	begin
-		
+        ajouterNouvelAdherent := false;
+        
+		if nbAdherents < Cmax - 1 then
+        begin
+            tabAdherents[nbAdherents] := adherent;
+            nbAdherents := nbAdherents + 1;
+            ajouterNouvelAdherent := true;
+        end;
 	end;
 	
 	function supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
+    var
+        i : integer;
+        indiceAdherent : integer;
 	begin
-		
+		supprimerAdherent := false;
+        
+        // Vérifie d'abord qu'il y ait des adhérents
+        if nbAdherents > 0 then
+        begin
+            //Vérifie ensuite que celui-ci n'a pas un emprunt actif
+            if u_livre.compteEmpruntsParAdherent(tabEmprunt, nbEmprunts, adherent) = 0 then
+            begin
+                //Trouve l'adhérent dans la liste
+                if trouverIndiceAdherent(tabAdherents, nbAdherents, adherent, indiceAdherent) then
+                begin
+                    //Le supprime et met à jour le nombre d'adhérents
+                    for i := indiceAdherent to nbAdherents - 2 do
+                    begin
+                        tabAdherents[i] := tabAdherents[i + 1];
+                    end;
+                    nbAdherents := nbAdherents - 1;
+                    supprimerAdherent := true;
+                end;
+            end;
+        end;
 	end;
 	
 	function trouverIndiceAdherent(tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; var indiceRetour : integer) : boolean;
+    var
+        i : integer;
 	begin
-		
+        trouverIndiceAdherent := false;
+        i := 0;
+        
+		if nbAdherents > 0 then
+        begin
+            while ((i <= nbAdherents - 1) or (trouverIndiceAdherent = false)) do
+            begin
+                if tabAdherents[i].codeAdherent = adherent.codeAdherent then
+                begin
+                    indiceRetour := i;
+                    trouverIndiceAdherent := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:integer; codeAdherent:string; var adherentTrouve:Tadherent) : boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverAdherentParCode := false;
+        i := 0;
+        
+		if nbAdherents > 0 then
+        begin
+            while ((i <= nbAdherents - 1) or (trouverAdherentParCode = false)) do
+            begin
+                if tabAdherents[i].codeAdherent = codeAdherent then
+                begin
+                    adherentTrouve := tabAdherents[i];
+                    trouverAdherentParCode := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):boolean;
