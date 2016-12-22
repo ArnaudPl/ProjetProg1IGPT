@@ -135,8 +135,25 @@ implementation
 	end;
 	
 	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverLivreParISBN := false;
+        i := 0;
+        
+		if nbLivres > 0 then
+        begin
+            while ((i <= nbLivres - 1) or (trouverIndiceLivre = false)) do
+            begin
+                if tabLivres[i].isbn = isbn then
+                begin
+                    livre := tabLivres[i];
+                    trouverLivreParISBN := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
