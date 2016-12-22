@@ -56,6 +56,7 @@ implementation
         readln(adherentSaisi.adresse.pays);
         
         
+		saisirAdherent := adherentSaisi;
 		
 	end;
 	
