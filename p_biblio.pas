@@ -87,7 +87,32 @@ begin
 			ClrScr;
 			case choix of 
 				1 : begin
-						
+						writeln('-- Emprunt d''un livre --');
+                        write('Veuillez entrer le code de l''adherent : ');
+                        readln(codeAdherent);
+                        
+                        if (u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents, codeAdherent, adherent)) then
+                        begin
+                            write('Veuillez saisir l''ISBN du livre : ');
+                            readln(isbn);
+                            
+                            if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
+                            begin
+                                writeln('Veuillez saisir la date de l''emprunt :');
+                                write('Jour : ');
+                                readln(date.jour);
+                                write('Mois : ');
+                                readln(date.mois);
+                                write('Année : ');
+                                readln(date.année);
+                                
+                                
+                            end;
+                            else
+                                writeln('Erreur - Aucun livre ne correspond à cet ISBN.');
+                        end;
+                        else
+                            writeln('Erreur - Aucun adhérent trouvé.');
 					end;
 				2 : begin
 						
