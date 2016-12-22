@@ -1,6 +1,13 @@
+{
+Nom : u_adherent
+Descritpion : Unit gérant un adherent
+Auteur : Christe Thibaud
+Date création : 21.12.2016
+Dernière modification : 21.12.2016
+}
+
 unit u_adherent;
 interface
-    uses u_biblio,u_livre;
 	const
 		Cmax = 100;
 		
@@ -29,17 +36,19 @@ interface
 		procedure afficherAdherent(adherent:Tadherent);
 		
 implementation
-	
+	{   Nom fonction :  saisirAdherent
+        Description : Permet de saisir un nouveau adherent
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	function saisirAdherent():Tadherent;
     var
         adherentSaisi : Tadherent;
 	begin
         writeln('------- Saisie d''un adherent -------');
-        repeat
-            writeln('- Veuillez saisir le code : ');
-            readln(adherentSaisi.codeAdherent);
-        until (not trouverAdherentParCode(tabAdherents,nbAdherents,adherentSaisi.codeAdherent,indiceRetour,adherentSaisi));
-        
+    
+        writeln('- Veuillez saisir le code : ');
+        readln(adherentSaisi.codeAdherent);
         writeln('- Veuillez saisir le nom : ');
         readln(adherentSaisi.nom);
         writeln('- Veuillez saisir le prenom : ');
@@ -60,10 +69,18 @@ implementation
 		
 	end;
 	
-	
+	{   Nom fonction :  afficherAdherent
+        Description : Permet d afficher un adherent donné
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	procedure afficherAdherent(adherent:Tadherent);
-	begin
-		//Affichage réalisé dans u_biblio procedure afficheAdherents !
+	begin        
+        writeln(' |- ', adherent.nom, ' ', adherent.prenom);
+        writeln(' |  |- Code : ', adherent.codeAdherent);
+        writeln(' |  |- Adresse : ', adherent.adresse.rue, ' ', adherent.adresse.numeroRue);
+        writeln(' |  |- Ville : ', adherent.adresse.npa, ' ', adherent.adresse.ville, ' - ', adherent.adresse.pays);
+            
 	end;
 
 end.
