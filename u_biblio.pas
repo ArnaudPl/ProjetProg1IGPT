@@ -241,8 +241,25 @@ implementation
 	end;
 	
 	function trouverAdherentParCode(tabAdherents:TypeTabAdherents; var nbAdherents:integer; codeAdherent:string; var adherentTrouve:Tadherent) : boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverAdherentParCode := false;
+        i := 0;
+        
+		if nbAdherents > 0 then
+        begin
+            while ((i <= nbAdherents - 1) or (trouverAdherentParCode = false)) do
+            begin
+                if tabAdherents[i].codeAdherent = codeAdherent then
+                begin
+                    adherentTrouve := tabAdherents[i];
+                    trouverAdherentParCode := true;
+                end;
+                
+                i := i + 1;
+            end;
+        end;
 	end;
 	
 	function emprunterLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; livre:Tlivre; adherent:Tadherent;dateEmprunt:Tdate):boolean;
