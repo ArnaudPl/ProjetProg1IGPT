@@ -293,9 +293,22 @@ implementation
             end;
 	end;
 	
-	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean; 
+	function rendreLivre(var tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; emprunt:Temprunt):boolean;
+    var
+        indiceEmprunt : integer;
+        i : integer;
 	begin
-		
+		rendreLivre := false;
+        
+        if trouverIndiceEmprunt(tabEmprunts, nbEmprunts, emprunt, indiceEmprunt) then
+        begin
+            for i := indiceEmprunt to nbEmprunts - 2 do
+            begin
+                tabEmprunts[i] := tabEmprunts[i + 1];
+            end;
+            nbEmprunts := nbEmprunts - 1;
+            rendreLivre := true;
+        end;
 	end;
 	
 	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean;
