@@ -180,7 +180,14 @@ implementation
 	
 	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
 	begin
-		
+        ajouterNouvelAdherent := false;
+        
+		if nbAdherents < Cmax - 1 then
+        begin
+            tabAdherents[nbAdherents] := adherent;
+            nbAdherents := nbAdherents + 1;
+            ajouterNouvelAdherent := true;
+        end;
 	end;
 	
 	function supprimerAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):boolean;
