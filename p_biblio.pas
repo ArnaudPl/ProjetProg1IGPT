@@ -25,17 +25,25 @@ uses u_biblio, u_livre, u_adherent, crt;
         livre.nbPages := 240;
         livre.nbExemplaires := 3;
         
+        u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
+        
+        
         livre.isbn := '9782070196678';
         livre.titre := 'Chanson douce';
         livre.codeAuteur := 'Leïla Slimani';
         livre.nbPages := 240;
         livre.nbExemplaires := 3;
         
+        u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
+        
+        
         livre.isbn := '9782749928937';
         livre.titre := 'Instincts';
         livre.codeAuteur := 'Sarah Marquis';
         livre.nbPages := 274;
         livre.nbExemplaires := 1;
+        
+        u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
 	end;
 var
 	biblio : Tbibliotheque;
