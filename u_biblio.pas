@@ -320,8 +320,24 @@ implementation
 	end;
 	
 	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
+	var
+        i : integer;
 	begin
-		
+        trouverEmpruntParNumero := false;
+        i := 0;
+        
+        if nbEmprunts > 0 then
+        begin
+            while ((i <= nbEmprunts - 1) or (trouverEmpruntParNumero = false)) do
+            begin
+                if (tabEmprunts[i].numeroEmprunt = numero) then
+                begin
+                    emprunt := tabEmprunts[i];
+                    trouverEmpruntParNumero := true;
+                end;
+                i := i + 1;
+            end;
+        end;
 	end;
     
     //Procédures et fonctions privées
