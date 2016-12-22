@@ -133,7 +133,17 @@ begin
                             writeln('Erreur - Aucun emprunt ne correspond a ce numero.');
 					end;
 				3 : begin
-						
+						writeln('-- Verification de la disponibilite du livre --');
+                        write('Veuillez enter l''ISBN du livre : ');
+                        readln(isbn);
+                        
+                        if trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
+                            if estDisponible(livre, biblio.tabEmprunts, biblio.nbEmprunts) then
+                                writeln('Le livre est disponible !')
+                            else
+                                writeln('Le livre n''est pas disponible.')
+                        else
+                            writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
 					end;
 				4 : begin
 						
