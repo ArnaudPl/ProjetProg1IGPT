@@ -60,13 +60,12 @@ interface
         
 		// Vérifie s'il reste au moins un exemplaire du livre qui n'est pas emprunté
 		function estDisponible(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts:integer):boolean;
-        
-		// Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
+        // Compte le nombre d'exemplaires du livre qui ne sont pas empruntés et retourne le total
 		function compteExemplairesDisponibles(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
-        
-		// Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
+        // Compte le nombre d'exemplaires du livre qui sont empruntés et retourne le total
 		function compteExemplairesEmpruntes(livre:Tlivre; tabEmprunt:TypeTabEmprunts; nbEmprunts : integer):integer;
-		// Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
+		
+        // Compte le nombre d'emprunts qui sont au code de l'adhérent et retourne le total
 		function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
 
 implementation
@@ -236,8 +235,24 @@ implementation
         compteExemplairesEmpruntes := nbExemplaireEmpruntes;
 	end;
 	
+    
+    {   Nom fonction :  compteEmpruntsParAdherent
+        Description : Compte le nombre d emprunts pour un adhrent donné
+        Auteur : Chritste Thibaud
+        Date : 22.12.2016
+    }
 	function compteEmpruntsParAdherent(tabEmprunt:TypeTabEmprunts; nbEmprunts : integer; adherent : Tadherent) : integer;
+    var 
+        ind : integer;
+        nbEmprunt : integer;
 	begin
-		
+        nbEmprunt := 0;
+        for ind:= 0 to (nbEmprunts-1) do
+        begin
+            if(tabEmprunt[ind].adherent.codeAdherent = adherent.codeAdherent) then
+                nbEmprunt := nbEmprunt + 1;
+        end;
+        
+        compteEmpruntsParAdherent := nbEmprunt;
 	end;
 end.
