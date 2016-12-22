@@ -1,5 +1,6 @@
 unit u_adherent;
 interface
+    uses u_biblio,u_livre;
 	const
 		Cmax = 100;
 		
@@ -30,7 +31,31 @@ interface
 implementation
 	
 	function saisirAdherent():Tadherent;
+    var
+        adherentSaisi : Tadherent;
 	begin
+        writeln('------- Saisie d''un adherent -------');
+        repeat
+            writeln('- Veuillez saisir le code : ');
+            readln(adherentSaisi.codeAdherent);
+        until (not trouverAdherentParCode(tabAdherents,nbAdherents,adherentSaisi.codeAdherent,indiceRetour,adherentSaisi));
+        
+        writeln('- Veuillez saisir le nom : ');
+        readln(adherentSaisi.nom);
+        writeln('- Veuillez saisir le prenom : ');
+        readln(adherentSaisi.prenom);
+        writeln('- Veuillez saisir la rue : ');
+        readln(adherentSaisi.adresse.rue);
+        writeln('- Veuillez saisir le numero de la rue : ');
+        readln(adherentSaisi.adresse.numeroRue);
+        writeln('- Veuillez saisir le npa  : ');
+        readln(adherentSaisi.adresse.npa);
+        writeln('- Veuillez saisir la ville : ');
+        readln(adherentSaisi.adresse.ville);
+        writeln('- Veuillez saisir le pays : ');
+        readln(adherentSaisi.adresse.pays);
+        
+        
 		
 	end;
 	
