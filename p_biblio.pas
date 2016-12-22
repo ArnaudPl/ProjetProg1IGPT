@@ -153,7 +153,26 @@ begin
 						
 					end;
 				13 : begin
-						
+                        writeln('-- Verification si la bibliotheque est ouverte --');
+                
+                        repeat
+                            writeln('Veuillez saisir un jour');
+                            readln(jourOuvert);
+                        until((jourOuvert == 'lundi') or (jourOuvert == 'mardi') or (jourOuvert == 'mercredi')
+                        or (jourOuvert == 'jeudi') or (jourOuvert == 'vendredi') or (jourOuvert == 'samedi') 
+                        or (jourOuvert == 'dimanche'));
+                        
+                        repeat
+                            writeln('Veuillez saisir une heure (entre 0 et 24)');
+                            readln(heureOuvert);
+                        until((heureOuvert >= 0) and (heureOuvert <= 24);
+                        
+                        
+                        if (u_biblio.estOuverte(jourOuvert,heureOuvert)) then
+                            writeln('La bibliotheque est ouverte durant l''horaire saisi.')
+                        else
+                             writeln('La bibliotheque est fermee durant l''horaire saisi.');
+                        	
 					end;
 				14 : begin
 				        afficherBibliotheque(biblio);
