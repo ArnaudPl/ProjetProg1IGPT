@@ -219,6 +219,21 @@ begin
                         ClrScr;
 					end;
 				9 : begin
+                        writeln('-- Recherche et affichage d''adherent --');
+                        continuer := 'go';
+                        
+                        repeat
+                            write('Veuillez entrer le code d''un adherent : ');
+                            readln(codeAdherent); 
+                            
+                            if (u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents,codeAdherent,adherent)) then
+                                u_adherent.afficherAdherent(adherent)
+                            else
+                               writeln('Erreur - Aucun adherent porte ce code.'); 
+                               
+                            write('Entrez "stop" pour arreter ou "go" pour continuer : ');
+                            readln(continuer);
+                        until(continuer = 'stop');
 						
 					end;
 				10 : begin
