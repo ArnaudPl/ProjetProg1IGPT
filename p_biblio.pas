@@ -44,6 +44,30 @@ uses u_biblio, u_livre, u_adherent, crt;
         livre.nbExemplaires := 1;
         
         u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
+        
+        
+        //Insertion d'adhérents
+        adherent.codeAdherent := 'A';
+        adherent.nom := 'Quiroule';
+        adherent.prenom := 'Pierre';
+        adherent.adresse.rue := 'Rue de l''hopital';
+        adherent.adresse.numeroRue := '15';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        adherent.codeAdherent := 'B';
+        adherent.nom := 'Perret';
+        adherent.prenom := 'Hubert';
+        adherent.adresse.rue := 'Rue principale';
+        adherent.adresse.numeroRue := '54';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        
 	end;
 var
 	biblio : Tbibliotheque;
