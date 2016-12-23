@@ -268,7 +268,7 @@ implementation
         
 		if nbAdherents > 0 then
         begin
-            while ((i <= nbAdherents - 1) or (trouverAdherentParCode = false)) do
+            while ((i <= nbAdherents - 1) and (trouverAdherentParCode = false)) do
             begin
                 if tabAdherents[i].codeAdherent = codeAdherent then
                 begin
@@ -393,7 +393,7 @@ implementation
                 writeln(' |  |- Livre : ', biblio.tabEmprunts[i].livre.titre);
                 writeln(' |  |  |- ISBN : ', biblio.tabEmprunts[i].livre.isbn);
                 writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
-                writeln(' |  |- Adhérent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
+                writeln(' |  |- Adherent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
                 writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
 
                 if i < biblio.nbEmprunts - 1 then

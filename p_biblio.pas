@@ -27,7 +27,6 @@ uses u_biblio, u_livre, u_adherent, crt;
         
         u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
         
-        
         livre.isbn := '9782749928937';
         livre.titre := 'Instincts';
         livre.codeAuteur := 'Sarah Marquis';
@@ -126,7 +125,7 @@ begin
                                 readln(date.jour);
                                 write('Mois : ');
                                 readln(date.mois);
-                                write('Année : ');
+                                write('Annee : ');
                                 readln(date.annee);
                                 
                                 if u_biblio.emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
