@@ -162,7 +162,7 @@ implementation
         
 		if nbLivres > 0 then
         begin
-            while ((i <= nbLivres - 1) or (trouverLivreParISBN = false)) do
+            while ((i <= nbLivres - 1) and (trouverLivreParISBN = false)) do
             begin
                 if tabLivres[i].isbn = isbn then
                 begin
