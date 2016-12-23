@@ -322,7 +322,7 @@ implementation
         
         if nbEmprunts > 0 then
         begin
-            while ((i <= nbEmprunts - 1) or (trouverIndiceEmprunt = false)) do
+            while ((i <= nbEmprunts - 1) and (trouverIndiceEmprunt = false)) do
             begin
                 if (tabEmprunts[i].numeroEmprunt = emprunt.numeroEmprunt) then
                 begin
@@ -343,7 +343,7 @@ implementation
         
         if nbEmprunts > 0 then
         begin
-            while ((i <= nbEmprunts - 1) or (trouverEmpruntParNumero = false)) do
+            while ((i <= nbEmprunts - 1) and (trouverEmpruntParNumero = false)) do
             begin
                 if (tabEmprunts[i].numeroEmprunt = numero) then
                 begin

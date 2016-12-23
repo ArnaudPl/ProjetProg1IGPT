@@ -134,7 +134,7 @@ begin
                                     writeln('L''emprunt n''a pas pu etre effectue.');
                             end
                             else
-                                writeln('Erreur - Aucun livre ne correspond à cet ISBN.');
+                                writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
                         end
                         else
                             writeln('Erreur - Aucun adherent trouve.');
@@ -292,7 +292,7 @@ begin
                         else
                              writeln('Erreur - le livre n''a pas pu etre supprime.')
                     else
-                        writeln('Erreur - Aucn livre ne correspond à cet isbn.');
+                        writeln('Erreur - Aucn livre ne correspond a cet isbn.');
 						
 					end;
 				12 : begin
