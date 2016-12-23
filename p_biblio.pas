@@ -18,19 +18,10 @@ uses u_biblio, u_livre, u_adherent, crt;
 		biblio.adresse.pays:='Suisse';
         
         
-         //Insertion de livres bibliothèque
+        //Insertion de livres bibliothèque
         livre.isbn := '9782070196678';
         livre.titre := 'Chanson douce';
-        livre.codeAuteur := 'Leïla Slimani';
-        livre.nbPages := 240;
-        livre.nbExemplaires := 3;
-        
-        u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
-        
-        
-        livre.isbn := '9782070196678';
-        livre.titre := 'Chanson douce';
-        livre.codeAuteur := 'Leïla Slimani';
+        livre.codeAuteur := 'Leila Slimani';
         livre.nbPages := 240;
         livre.nbExemplaires := 3;
         
@@ -252,13 +243,13 @@ begin
                             if(livre.nbExemplaires <= 1) then
                                 begin
                                     if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
-                                        writeln('Supression effectué !')
+                                        writeln('Supression effectue !')
                                     else
                                         writeln('Erreur - le livre n''a pas pu etre supprime.')
                                 end
                             else
                                 if(u_livre.supprimerExemplaire(livre,biblio.tabEmprunts, biblio.nbEmprunts)) then
-                                        writeln('Supression effectué') 
+                                        writeln('Supression effectuee') 
                                 else
                                         writeln('Erreur - la suppression n''a pas pu s''effectuer.')
                                 end
@@ -274,7 +265,7 @@ begin
                     readln(isbn);
                     if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
                         if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
-                            writeln('Supression effectué !')
+                            writeln('Supression effectue !')
                         else
                              writeln('Erreur - le livre n''a pas pu etre supprime.')
                     else
