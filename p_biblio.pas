@@ -44,6 +44,30 @@ uses u_biblio, u_livre, u_adherent, crt;
         livre.nbExemplaires := 1;
         
         u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
+        
+        
+        //Insertion d'adhérents
+        adherent.codeAdherent := 'A';
+        adherent.nom := 'Quiroule';
+        adherent.prenom := 'Pierre';
+        adherent.adresse.rue := 'Rue de l''hopital';
+        adherent.adresse.numeroRue := '15';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        adherent.codeAdherent := 'B';
+        adherent.nom := 'Perret';
+        adherent.prenom := 'Hubert';
+        adherent.adresse.rue := 'Rue principale';
+        adherent.adresse.numeroRue := '54';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        
 	end;
 var
 	biblio : Tbibliotheque;
@@ -168,8 +192,13 @@ begin
                         
                         if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                         begin
-                            u_livre.ajouterExemplaire(livre);
-                            writeln('Un exemplaire a ete ajoute !');
+                            if u_biblio.trouverIndiceLivre(biblio.tabLivres, biblio.nbLivres, livre, indiceLivre) then
+                            begin
+                                u_livre.ajouterExemplaire(biblio.tabLivres[indiceLivre]);
+                                writeln('Un exemplaire a ete ajoute !');
+                            end
+                            else
+                                writeln('L''exemplaire n''a pas pu etre ajoute.');
                         end
                         else
                             writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
@@ -219,6 +248,21 @@ begin
                         ClrScr;
 					end;
 				9 : begin
+                        writeln('-- Recherche et affichage d''adherent --');
+                        continuer := 'go';
+                        
+                        repeat
+                            write('Veuillez entrer le code d''un adherent : ');
+                            readln(codeAdherent); 
+                            
+                            if (u_biblio.trouverAdherentParCode(biblio.tabAdherents, biblio.nbAdherents,codeAdherent,adherent)) then
+                                u_adherent.afficherAdherent(adherent)
+                            else
+                               writeln('Erreur - Aucun adherent porte ce code.'); 
+                               
+                            write('Entrez "stop" pour arreter ou "go" pour continuer : ');
+                            readln(continuer);
+                        until(continuer = 'stop');
 						
 					end;
 				10 : begin
