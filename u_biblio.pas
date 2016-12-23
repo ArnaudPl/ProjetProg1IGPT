@@ -393,7 +393,6 @@ implementation
                 writeln(' |  |- Livre : ', biblio.tabEmprunts[i].livre.titre);
                 writeln(' |  |  |- ISBN : ', biblio.tabEmprunts[i].livre.isbn);
                 writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
-                writeln(' |  |  |- Auteur : ', biblio.tabEmprunts[i].livre.codeAuteur);
                 writeln(' |  |- Adhérent : ', biblio.tabEmprunts[i].adherent.nom, ' ', biblio.tabEmprunts[i].adherent.prenom);
                 writeln(' |  |  |- Code : ', biblio.tabEmprunts[i].adherent.codeAdherent);
 
