@@ -27,7 +27,6 @@ uses u_biblio, u_livre, u_adherent, crt;
         
         u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
         
-        
         livre.isbn := '9782749928937';
         livre.titre := 'Instincts';
         livre.codeAuteur := 'Sarah Marquis';
@@ -35,6 +34,30 @@ uses u_biblio, u_livre, u_adherent, crt;
         livre.nbExemplaires := 1;
         
         u_biblio.ajouterNouveauLivre(biblio.tabLivres, biblio.nbLivres, livre);
+        
+        
+        //Insertion d'adhérents
+        adherent.codeAdherent := 'A';
+        adherent.nom := 'Quiroule';
+        adherent.prenom := 'Pierre';
+        adherent.adresse.rue := 'Rue de l''hopital';
+        adherent.adresse.numeroRue := '15';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        adherent.codeAdherent := 'B';
+        adherent.nom := 'Perret';
+        adherent.prenom := 'Hubert';
+        adherent.adresse.rue := 'Rue principale';
+        adherent.adresse.numeroRue := '54';
+        adherent.adresse.npa := '2000';
+        adherent.adresse.ville := 'Neuchatel';
+        adherent.adresse.pays := 'Suisse';
+        u_biblio.ajouterNouvelAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent);
+        
+        
 	end;
 var
 	biblio : Tbibliotheque;
@@ -102,7 +125,7 @@ begin
                                 readln(date.jour);
                                 write('Mois : ');
                                 readln(date.mois);
-                                write('Année : ');
+                                write('Annee : ');
                                 readln(date.annee);
                                 
                                 if u_biblio.emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
@@ -111,7 +134,7 @@ begin
                                     writeln('L''emprunt n''a pas pu etre effectue.');
                             end
                             else
-                                writeln('Erreur - Aucun livre ne correspond à cet ISBN.');
+                                writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
                         end
                         else
                             writeln('Erreur - Aucun adherent trouve.');
@@ -269,7 +292,7 @@ begin
                         else
                              writeln('Erreur - le livre n''a pas pu etre supprime.')
                     else
-                        writeln('Erreur - Aucn livre ne correspond à cet isbn.');
+                        writeln('Erreur - Aucn livre ne correspond a cet isbn.');
 						
 					end;
 				12 : begin
