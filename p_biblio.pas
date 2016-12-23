@@ -128,10 +128,16 @@ begin
                                 write('Annee : ');
                                 readln(date.annee);
                                 
-                                if u_biblio.emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
-                                    writeln('Emprunt effectue !')
+                                
+                                if(u_livre.estDisponible(livre, biblio.tabEmprunts, biblio.nbEmprunts)) then
+                                    begin
+                                        if u_biblio.emprunterLivre(biblio.tabEmprunts, biblio.nbEmprunts, livre, adherent, date) then
+                                            writeln('Emprunt effectue !')
+                                        else
+                                            writeln('L''emprunt n''a pas pu etre effectue.');
+                                    end
                                 else
-                                    writeln('L''emprunt n''a pas pu etre effectue.');
+                                     writeln('Erreur - Le livre n''est pas disponible.');
                             end
                             else
                                 writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
