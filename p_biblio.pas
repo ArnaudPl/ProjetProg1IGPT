@@ -168,8 +168,13 @@ begin
                         
                         if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                         begin
-                            u_livre.ajouterExemplaire(livre);
-                            writeln('Un exemplaire a ete ajoute !');
+                            if u_biblio.trouverIndiceLivre(biblio.tabLivres, biblio.nbLivres, livre, indiceLivre) then
+                            begin
+                                u_livre.ajouterExemplaire(biblio.tabLivres[indiceLivre]);
+                                writeln('Un exemplaire a ete ajoute !');
+                            end
+                            else
+                                writeln('L''exemplaire n''a pas pu etre ajoute.');
                         end
                         else
                             writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
