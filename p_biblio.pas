@@ -6,7 +6,7 @@ uses u_biblio, u_livre, u_adherent, crt;
 		u_livre.initUnite();
 	end;
 	
-	//Procedure chargeant quelques donées de base
+	//Procedure chargeant quelques données de base
 	procedure chargeDonneesInitiales(var biblio:Tbibliotheque; var adherent: Tadherent; var livre: Tlivre);
 	begin
         //Insertion d'une bibliothèque
