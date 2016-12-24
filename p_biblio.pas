@@ -270,8 +270,7 @@ begin
                     if (u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre)) then
                         begin
                             if(livre.nbExemplaires <= 1) then
-                                begin
-                                    if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
+                                begin  if(u_biblio.supprimerLivre(biblio.tabLivres,biblio.nbLivres,livre,biblio.tabEmprunts,biblio.nbEmprunts)) then
                                         writeln('Supression effectue !')
                                     else
                                         writeln('Erreur - le livre n''a pas pu etre supprime.')
@@ -284,9 +283,7 @@ begin
                                 end
                     else
                         writeln('Erreur - Aucun livre ne correspond a cet ISBN.');
-                    
-                     
-                    	
+                        	
 					end;
 				11 : begin
                     writeln('-- Suppression d''un livre --');
@@ -311,7 +308,7 @@ begin
                                 if (u_biblio.supprimerAdherent(biblio.tabAdherents, biblio.nbAdherents, adherent,biblio.tabEmprunts,biblio.nbEmprunts)) then
                                     writeln('Supression effectuee !')
                                 else
-                                    writeln('Erreur -  l''adherent n''a pas pu etre supprime.');
+                                    writeln('Erreur -  l''adherent n''a pas pu etre supprime, verfiez les emprunts.');
                             end
                          else
                             begin
