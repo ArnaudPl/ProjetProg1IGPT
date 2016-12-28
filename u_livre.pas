@@ -181,9 +181,9 @@ implementation
     begin
     
         deroulementOK := false;
-        if ((livre.nbExemplaires > 0) and (compteExemplairesDisponibles(livre,tabEmprunt,nbEmprunts) > 0)) then
-            begin    
-                livre.nbExemplaires := livre.nbExemplaires -1;
+        if ((livre.nbExemplaires > 1) and (compteExemplairesDisponibles(livre,tabEmprunt,nbEmprunts) > 0)) then
+            begin
+                livre.nbExemplaires := livre.nbExemplaires - 1;
                 deroulementOK := true;
             end; 
     
