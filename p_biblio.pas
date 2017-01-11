@@ -1,5 +1,5 @@
 program p_biblio;
-uses u_biblio, u_livre, u_adherent, crt;
+uses u_biblio, u_livre, u_adherent, crt, sysutils;
 
 	procedure initProgram();
 	begin
@@ -319,11 +319,12 @@ begin
                             
 					end;
 				13 : begin
+                       
                         writeln('-- Verification si la bibliotheque est ouverte --');
-                
                         repeat
                             write('Veuillez saisir un jour : ');
                             readln(jourOuvert);
+                            jourOuvert := LowerCase(jourOuvert);
                         until((jourOuvert = 'lundi') or (jourOuvert = 'mardi') or (jourOuvert = 'mercredi')
                         or (jourOuvert = 'jeudi') or (jourOuvert = 'vendredi') or (jourOuvert = 'samedi') 
                         or (jourOuvert = 'dimanche'));

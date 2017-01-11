@@ -97,11 +97,15 @@ implementation
         writeln('- Veuillez le nom de l''auteur : ');
         readln(livreSaisi.codeAuteur);
         
-        writeln('- Veuillez le nombre de pages : ');
-        readln(livreSaisi.nbPages);
+        repeat
+            writeln('- Veuillez le nombre de pages : ');
+            readln(livreSaisi.nbPages);
+        until(livreSaisi.nbPages > 0);
         
-        writeln('- Veuillez le nombre d''exemplaires : ');
-        readln(livreSaisi.nbExemplaires);
+        repeat
+            writeln('- Veuillez le nombre d''exemplaires : ');
+            readln(livreSaisi.nbExemplaires);
+        until(livreSaisi.nbExemplaires > 0);    
     
 		saisirLivre := livreSaisi;
 	end;
