@@ -71,6 +71,7 @@ var
 	heureOuvert : integer;
 	jourOuvert : string;
 	indiceLivre : integer;
+    dateCorrecte : boolean;
 	
 	// Attribut(s) d'un livre :
 	isbn:string;
@@ -121,12 +122,60 @@ begin
                             if u_biblio.trouverLivreParISBN(biblio.tabLivres, biblio.nbLivres, isbn, livre) then
                             begin
                                 writeln('Veuillez saisir la date de l''emprunt :');
-                                write('Jour : ');
-                                readln(date.jour);
-                                write('Mois : ');
-                                readln(date.mois);
-                                write('Annee : ');
-                                readln(date.annee);
+                                
+                                dateCorrecte := false;
+                                repeat
+                                    write('Annee : ');
+                                    readln(date.annee);
+                                    if ( date.annee >= 1900 ) then
+                                        dateCorrecte := true
+                                    else
+                                        writeln('Merci de saisir une annee superieure a 1900.');
+                                until dateCorrecte;
+                                
+                                dateCorrecte := false;
+                                repeat
+                                    write('Mois : ');
+                                    readln(date.mois);
+                                    if ( (date.mois <= 12) and (date.mois >= 1) ) then
+                                        dateCorrecte := true
+                                    else
+                                        writeln('Le mois saisi est incorrect. Veuillez saisir un mois entre 1 et 12.');
+                                until dateCorrecte;
+                                
+                                dateCorrecte := false;
+                                repeat
+                                    write('Jour : ');
+                                    readln(date.jour);
+                                    if ( date.jour > 0 ) then
+                                        begin
+                                            if ( (date.mois = 1) or (date.mois = 3) or (date.mois = 5) or (date.mois = 7) or (date.mois = 8) or (date.mois = 10) or (date.mois = 12)) then //Mois à 31 jours
+                                                begin
+                                                    if ( date.jour <= 31 ) then
+                                                        dateCorrecte := true;
+                                                end
+                                            else //Mois à 30 jours + février
+                                                begin
+                                                    if ( date.mois = 2 ) then //Février
+                                                        begin
+                                                            if ( date.jour <= 28 ) then
+                                                                begin
+                                                                    dateCorrecte := true;
+                                                                end
+                                                        end
+                                                    else
+                                                        begin
+                                                            if ( date.jour <= 30 ) then
+                                                                begin
+                                                                    dateCorrecte := true;
+                                                                end
+                                                        end
+                                                end
+                                        end;
+                                    
+                                    if ( dateCorrecte = false ) then
+                                        writeln('Le jour saisi n''est pas valide. Merci de saisir un jour valide.');
+                                until dateCorrecte;
                                 
                                 
                                 if(u_livre.estDisponible(livre, biblio.tabEmprunts, biblio.nbEmprunts)) then
