@@ -392,6 +392,8 @@ begin
 					end;
 				14 : begin
 				        afficherBibliotheque(biblio);
+                        writeln('Appuyez sur une touche pour continuer.');
+                        readln();
 					end;
 				0 : begin
 						
