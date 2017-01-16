@@ -102,10 +102,11 @@ begin
 			writeln('12. Supprimer un adherent');
 			writeln('13. Verifier si la bibliotheque est ouverte');
 			writeln('14. Afficher toutes les informations de la bibliotheque');
+            writeln('15. Afficher les livres de la bibliotheque');
 			writeln('0. Quitter l''application');
 			repeat
 				readln(choix);
-			until (choix >= 0) AND (choix <= 14);
+			until (choix >= 0) AND (choix <= 15);
 			
 			ClrScr;
 			case choix of 
@@ -395,6 +396,11 @@ begin
                         writeln('Appuyez sur une touche pour continuer.');
                         readln();
 					end;
+                15: begin
+                        afficherLivres(biblio.tabLivres, biblio.nbLivres);
+                        writeln('Appuyez sur une touche pour continuer.');
+                        readln();
+                    end;
 				0 : begin
 						
 					end;

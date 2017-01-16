@@ -35,6 +35,8 @@ interface
 	function trouverLivreParISBN(tabLivres : TypeTabLivres; nbLivres : integer; isbn:string; var livre:Tlivre):boolean;
 	// Cherche dans la bibliothèque tous les livres qui contiennent le code d'auteur passé en paramètre
 	function trouverLivresParAuteur(tabLivres : TypeTabLivres; nbLivres : integer; codeAuteur:string; var tabLivresTrouves:TypeTabLivres; var nbLivresTrouves:integer):boolean;
+    //Affiche les livres de la bibliothèques
+    procedure afficherLivres(tabLivres : TypeTabLivres; nbLivres : integer);
 	
 	// Ajoute un nouvel adhérent à la bibliothèque
 	function ajouterNouvelAdherent(var tabAdherents:TypeTabAdherents; var nbAdherents:integer; adherent:Tadherent) : boolean;
@@ -53,6 +55,7 @@ interface
 	function trouverIndiceEmprunt(tabEmprunts:TypeTabEmprunts; nbEmprunts:integer; emprunt:Temprunt; var indiceRetour : integer):boolean; 
 	// Cherche dans la bibliothèque l'emprunt qui correspond au numéro passé en paramètre
 	function trouverEmpruntParNumero(tabEmprunts:TypeTabEmprunts; var nbEmprunts:integer; var emprunt:Temprunt ;numero:integer):boolean;
+    
 
 implementation
 
@@ -405,4 +408,17 @@ implementation
         else
             writeln('Aucun emprunt realise.')
     end;
+    
+     procedure afficherLivres(tabLivres : TypeTabLivres; nbLivres : integer);
+     var
+        i : integer;
+     begin
+        writeln('Affichage des ', nbLivres, ' livres');
+        for i:=0  to nbLivres -1 do
+        begin
+            writeln(' |  - Livre : ', tabLivres[i].titre);
+            writeln(' |   |- ISBN : ', tabLivres[i].isbn);
+            writeln(' |   |- Auteur : ', tabLivres[i].codeAuteur);
+        end;
+     end;
 end.
